@@ -70,7 +70,7 @@
     \end{itemize}
 \end{frame}
 
-\section{History of VCS}
+\section{Background}
 
 \begin{frame}
     \frametitle{Before VCS}
@@ -127,12 +127,113 @@
     \end{itemize}
 \end{frame}
 
-\section{Single file VCS}
+\section{Early VCS}
 
 \subsection{SCCS}
+
+\begin{frame}
+    \frametitle{Source Code Control System (SCCS)}
+    \begin{itemize}
+	\item Arguably the first VCS system available
+	\item Developed by Bell Labs in 1972
+	\begin{itemize}
+	    \item For some comparison, C was written in 1972 at Bell Labs as well
+	\end{itemize}
+	\item SCCS was the dominant VCS until the advent of RCS 
+	\item Generally considered obsolete, and only mentioned for historical purposes
+	\item Except for the storage method - still used today
+    \end{itemize}
+\end{frame}
+
 \subsection{RCS}
-\section{Projectwide VCS}
+
+\begin{frame}
+    \frametitle{Revision Control System (RCS)}
+    \begin{itemize}
+	\item Released in 1982
+	\item Created as an evolution of SCCS
+	\item Stored changes of files as a series of diffs
+	\item Very popular, still used today
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pros and Cons of RCS}
+    \begin{itemize}
+	\item Advantages
+	\begin{itemize}
+	    \item Dirt simple
+	    \item Only need to know a few commands
+	    \item Changesets stored as series of diffs, so easy to view
+	    \item File locking and branching supported
+	\end{itemize}
+	\item Disadvantages
+	\begin{itemize}
+	    \item Single files only
+	    \item Cannot store entire projects
+	    \item No security mechanisms - anyone can tamper with diffs
+	    \item Branching sucks - everybody just locks the file
+	    \begin{itemize}
+		\item co -l agenda.dog
+		\item vim agenda.dog
+		\item ci -u agenda.dog
+	    \end{itemize}
+	\end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{``Modern'' VCS}
+
+\begin{frame}
+    \frametitle{Modern VCS}
+    \begin{itemize}
+	\item While early VCS systems were an improvement, they were still lacking
+	\item No real support for multiple users
+	\item No support for project wide version control
+	\begin{itemize}
+	    \item Make changes in foo.c and bar.c, and changes in one break the other
+	    \item No way to look at both of the changes without black magic and/or shell scripts
+	\end{itemize}
+	\item Technologies started coming out to deal with this 
+    \end{itemize}
+\end{frame}
+
 \subsection{CVS}
+
+\begin{frame}
+    \frametitle{Concurrent Version Systems (CVS)}
+    \begin{itemize}
+	\item Behold! Another evolution!
+	\item CVS was the first client-server VCS
+	\item Instead of just hacking on one file in a specific location, you check out a project
+	\item Support for project wide VCS
+	\item Support for multiple users simultaneously working on one project
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pros and Cons of CVS}
+    \begin{itemize}
+	\item Advantages
+	\begin{itemize}
+	    \item \ldots
+	    \item I got nothing.
+	\end{itemize}
+    \item Disadvantages
+	\begin{itemize}
+	    \item Where do we start?
+	    \item No moving/renaming of directories
+	    \item No versioning of symbolic links
+	    \item No unicode
+	    \item No atomic commits 
+	    \begin{itemize}
+		\item It'll commit enough changes to break everything!
+	    \end{itemize}
+	    \item CVS was used because it was the first, not because it was good.
+	\end{itemize}
+    \end{itemize}
+\end{frame}
+
 \subsection{SVN}
 \section{Distributed VCS}
 \subsection{Bitkeeper}
