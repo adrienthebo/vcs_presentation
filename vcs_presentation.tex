@@ -26,18 +26,24 @@
 \section{Introduction}
 
 \begin{frame}
-    \frametitle{What is VCS}
+    \frametitle{What is VCS?}
     \begin{itemize}
 	\item A Version Control System, or VCS, is a way to track changes to files
 	\item Allows you to manage code or documents as you edit it
+	\item Makes collaborating on a document/code significantly easier
     \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Why should you care?}
     \begin{itemize}
-	\item Track changes to files
-	\item Locate the instance a bug was introduced
+	\item Track changes to your files over time
+	\begin{itemize}
+	    \item Try out experimental ideas to code without risking and permanent harm
+	    \item Use VCS on your homework to track your changes between drafts
+	    \item Turn a VCS into a backup system!
+	\end{itemize}
+	\item Locate the revision that a bug was introduced
 	\item Manage changes to a single file across multiple users
 	\item VCS can prevent you from really buggering a project
 	\begin{itemize}
@@ -65,7 +71,64 @@
 \end{frame}
 
 \section{History of VCS}
+
+\begin{frame}
+    \frametitle{Before VCS}
+    \begin{itemize}
+	\item Living dangerously!
+    \end{itemize}
+    vim foo.txt \\
+    \begin{itemize}
+	\item {\em three hours later} \\
+    \end{itemize}
+    rm *.txt \\
+    \ldots \\
+    \begin{itemize}
+	\item Whoops. \\
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Do it yourself VCS}
+    \begin{itemize}
+	\item Users replicated VCS tools by doing everything by hand
+    \end{itemize}
+     vim foo.txt \\
+     cp foo.txt foo.txt.1 \&\& vim foo.txt \\
+     cp foo.txt.1 foo.txt.2 \&\& vim foo.txt \&\& cp foo.txt foo.txt.1 \&\& vim foo.txt \\
+    \ldots
+    \begin{itemize}
+	\item Obviously, this is not a very fun idea
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{The beginning of VCS}
+    \begin{itemize}
+	\item Initial idea of VCS came from engineering
+	\item Engineers would create blueprints, and save earlier revisions
+	\item If a version was not liked, it was trivial to roll back
+	\item Revision control was also applied in business, law
+	\item Any place where you may need to backtrack on a document, VCS will show up
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Concerns with VCS}
+    \begin{itemize}
+	\item Any VCS has to deal with some basic concerns
+	\begin{itemize}
+	    \item Merging changes
+	    \item Locking files
+	    \item Atomic commits
+	\end{itemize}
+	\item Each VCS handles these concerns differently
+    \end{itemize}
+\end{frame}
+
 \section{Single file VCS}
+
 \subsection{SCCS}
 \subsection{RCS}
 \section{Projectwide VCS}
