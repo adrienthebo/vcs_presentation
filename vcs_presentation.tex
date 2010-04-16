@@ -1,0 +1,79 @@
+\documentclass{beamer}
+
+\mode<presentation> { \usetheme{Antibes} }
+
+\usepackage{times}
+
+\title{Version control systems}
+\author{Finch \\
+    The CAT
+}
+
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+	\frametitle{Outline}
+	\tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+    \frametitle{What is VCS}
+    \begin{itemize}
+	\item A Version Control System, or VCS, is a way to track changes to files
+	\item Allows you to manage code or documents as you edit it
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why should you care?}
+    \begin{itemize}
+	\item Track changes to files
+	\item Locate the instance a bug was introduced
+	\item Manage changes to a single file across multiple users
+	\item VCS can prevent you from really buggering a project
+	\begin{itemize}
+	    \item ``Wait, you {\bf didn't} want that file deleted?''
+	\end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why should you care?}
+    \begin{itemize}
+	\item Any sane developer/project uses VCS
+	\begin{itemize}
+	    \item sourceforge
+	    \item code.google.com
+	    \item github/gitorious/git.or.cz
+	\end{itemize}
+	\item The CAT utilized VCS in many locations
+	\begin{itemize}
+	    \item agendas - RCS
+	    \item CRACK - Git
+	    \item intranet - Git
+	\end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{History of VCS}
+\section{Single file VCS}
+\subsection{SCCS}
+\subsection{RCS}
+\section{Projectwide VCS}
+\subsection{CVS}
+\subsection{SVN}
+\section{Distributed VCS}
+\subsection{Bitkeeper}
+\subsection{Git}
+\subsection{Mercurial}
+\subsection{Bazaar}
+\end{document}
