@@ -39,7 +39,7 @@
     \begin{itemize}
 	\item Track changes to your files over time
 	\begin{itemize}
-	    \item Try out experimental ideas to code without risking and permanent harm
+	    \item Try out experimental ideas to code without risking any permanent harm
 	    \item Use VCS on your homework to track your changes between drafts
 	    \item Turn a VCS into a backup system!
 	\end{itemize}
@@ -127,7 +127,7 @@
     \end{itemize}
 \end{frame}
 
-\section{Early VCS}
+\section{File based VCS}
 
 \subsection{SCCS}
 
@@ -182,7 +182,7 @@
     \end{itemize}
 \end{frame}
 
-\section{``Modern'' VCS}
+\section{Centralized VCS}
 
 \begin{frame}
     \frametitle{Modern VCS}
@@ -240,10 +240,31 @@
     \frametitle{Apache Subversion (SVN)}
     \begin{itemize}
 	\item Since CVS sucked so much, people wanted an alternative
-	\item SVN was supposed to be CVS without the problems
+	\item SVN was designed as CVS without the problems
 	\item Widely adopted by the open source community
-	\item
+	\item Support for a wide number of features
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{SVN Features}
+    \begin{itemize}
+	\item Support for Properties
+	\begin{itemize}
+	    \item On the fly keywording in the source - note the last changed date in a comment
+	    \item Store mime-types
+	    \item Store executable bit (*nix)
+	\end{itemize}
+    \item Sane branching
+    \item Support for authentication/authorization
+    \item Atomic commits
+    \item Sane file locking
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example SVN structure}
+    \includegraphics[scale = 0.30]{Subversion_project_visualization.png}
 \end{frame}
 
 \begin{frame}
@@ -253,7 +274,10 @@
 	\begin{itemize}
 	    \item The most widely used VCS today
 	    \item Robust and battle tested
+	    \item Fully centralized - collaboration is very easy
+	    \item Support for branching and tagging
 	\end{itemize}
+	\item Disadvantages
 	\begin{itemize}
 	    \item Fully centralized - no offline work
 	    \item Slow - network latency can increase time to work
@@ -262,9 +286,143 @@
     \end{itemize}
 \end{frame}
 
-\section{Distributed VCS}
-\subsection{Bitkeeper}
+\section{Decentralized VCS}
+
+\begin{frame}
+    \frametitle{Decentralized VCS}
+    \begin{itemize}
+	\item Centralized VCS has many limitations
+	\begin{itemize}
+	    \item No offline work
+	    \item Forking a project is not trivial
+	    \item Centralized model is not always the best for a project
+	\end{itemize}
+	\item People started experimenting with a decentralized model
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differences between CVCS and DCVS}
+    \begin{itemize}
+	\item Differences
+	\begin{itemize}
+	    \item All working copies are branches
+	    \item Most actions are local;
+	    \item Central repository can exist, but is not required
+	\end{itemize}
+	\item Advantages
+	\begin{itemize}
+	    \item Easy to fork and merge code
+	    \item Network connectivity is not required to use DVCS
+	    \item Resistant to failure
+	\end{itemize}
+	\item Disadvantages
+	\begin{itemize}
+	    \item Initial clone is costly, as it copies the entire repo
+	    \item Added complexity 
+	\end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{List of DVCS tools}
+    \begin{itemize}
+	\item Arch
+	\item Monotone
+	\item Darcs
+	\item Bazaar
+	\item Mercurial
+	\item {\bf Git} (We like git)
+    \end{itemize}
+\end{frame}
+
+
 \subsection{Git}
-\subsection{Mercurial}
-\subsection{Bazaar}
+
+\begin{frame}
+    \frametitle{Introduction to Git}
+    ``I'm an egotistical bastard, and I name all my projects after myself. First Linux, now git.'' \\
+    - Linus Torvalds
+    \begin{itemize}
+	\item Git is the heavyweight of the DVCS world
+	\item Open source DVCS created by Linus Torvalds, creator of the Linux kernel
+	\item Created to fill the gap left by a previous proprietary DVCS
+	\item The result of letting kernel hackers write a DVCS
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The inspiration for Git}
+    \begin{itemize}
+	\item Git is a remarkable tool that had to fulfill a difficult set of obligations
+	\item Track the entire kernel history, with incredible amounts of information
+	\item Needed to be small, fast, and powerful
+	\item Designed to be the complete opposite of CVS
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Characteristics of Git}
+    \begin{itemize}
+	\item Designed for nonlinear development (Think kernel development)
+	\item Built for distributed and offline work
+	\item Built for speed and ability to handle large projects
+	\item Cryptographic authentication/verification
+    \end{itemize}
+\end{frame}
+
+\subsubsection{Git internals}
+
+\begin{frame}
+    \frametitle{Implementation}
+    \begin{itemize}
+	\item Written in C
+	\item More closely resembles a filesystem than a standard VCS
+	\begin{itemize}
+	    \item This is what happens when you let a kernel hacker write a VCS!
+	\end{itemize}
+	\item Has types of blob, tree, commit, and tag
+	\item Objects are identified by a SHA-1 hash
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Blob}
+    \includegraphics{object-blob.png}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tree}
+    \includegraphics{object-tree.png}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Commit}
+    \includegraphics{object-commit.png}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tag}
+    \includegraphics{object-tag.png}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example}
+    \includegraphics[ scale = .50 ]{objects-example.png}
+\end{frame}
+
+\subsubsection{Using Git}
+
+\begin{frame}
+    \frametitle{Git workflow}
+    \includegraphics[scale = 0.3]{git-workflow.png}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+	\item Demo time!
+    \end{itemize}
+\end{frame}
+
 \end{document}
+
