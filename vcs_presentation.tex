@@ -341,8 +341,10 @@
 
 \begin{frame}
     \frametitle{Introduction to Git}
+    \begin{quotation}
     ``I'm an egotistical bastard, and I name all my projects after myself. First Linux, now git.'' \\
     - Linus Torvalds
+  \end{quotation}
     \begin{itemize}
 	\item Git is the heavyweight of the DVCS world
 	\item Open source DVCS created by Linus Torvalds, creator of the Linux kernel
@@ -387,17 +389,42 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Why hash everything?}
+  \begin{itemize}
+    \item Using hashes to identify parts of git repository may seem bizarre, but it adds a lot to git
+    \item Hashes ensure that nobody can tamper with any part of the repository without changing hashes
+    \item Allows for super fast retrieval of files
+      \begin{itemize}
+	\item Instead of searching a series of files for some content, you look for a specific filename
+	\item Instead of slowing down git, using hashes speeds it up
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Blob}
+    \begin{itemize}
+      \item A ``blob'' is used to store file data - it is generally a file.
+      \item Only contains the contents of a file 
+      \item No attributes like the file name are stored
+    \end{itemize}
     \includegraphics{images/object-blob.png}
 \end{frame}
 
 \begin{frame}
     \frametitle{Tree}
+    \begin{itemize}
+      \item A ``tree'' is basically like a directory 
+      \item It references a bunch of other trees and/or blobs (i.e. files and sub-directories)
+    \end{itemize}
     \includegraphics{images/object-tree.png}
 \end{frame}
 
 \begin{frame}
     \frametitle{Commit}
+    \begin{itemize}
+      \item A ``commit'' points to a single tree, marking it as what the project looked like at a certain point in time. 
+    \end{itemize}
     \includegraphics{images/object-commit.png}
 \end{frame}
 
