@@ -8,7 +8,7 @@ TEXFLAGS=-file-line-error -halt-on-error
 all: vcs_presentation.pdf
 
 %.pdf: %.tex
-	$(TEXCC) $(TEXFLAGS) $<
+	$(TEXCC) $(TEXFLAGS) $< && $(TEXCC) $(TEXFLAGS) $<
 
 clean: 
 	rm -f \
