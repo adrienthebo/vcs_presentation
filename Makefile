@@ -1,7 +1,7 @@
 # Makefile
 
 TEXCC=pdflatex
-TEXFLAGS=-file-line-error
+TEXFLAGS=-file-line-error -halt-on-error
 
 .PHONY: all clean
 
