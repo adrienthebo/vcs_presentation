@@ -3,6 +3,7 @@
 \mode<presentation> { \usetheme{Antibes} }
 
 \usepackage{times}
+\usepackage{hyperref}
 
 \title{Version control systems}
 \author{Adrien Thebo \\
@@ -337,7 +338,7 @@ The CAT
 \end{frame}
 
 
-\subsection{Git}
+\section{Git}
 
 \begin{frame}
   \frametitle{Introduction to Git}
@@ -373,7 +374,7 @@ The CAT
   \end{itemize}
 \end{frame}
 
-\subsubsection{Git internals}
+\subsection{Git internals}
 
 \begin{frame}
   \frametitle{Implementation}
@@ -393,7 +394,7 @@ The CAT
   \begin{itemize}
     \item Using hashes to identify parts of git repository may seem bizarre, but it adds a lot to git
     \item Hashes ensure that nobody can tamper with any part of the repository without changing hashes
-    \item Allows for super fast retrieval of files
+    \item Allows for extremely fast retrieval of files
       \begin{itemize}
 	\item Instead of searching a series of files for some content, you look for a specific filename
 	\item Instead of slowing down git, using hashes speeds it up
@@ -408,7 +409,7 @@ The CAT
     \item Only contains the contents of a file 
     \item No attributes like the file name are stored
   \end{itemize}
-  \includegraphics{images/object-blob.png}
+  \includegraphics[scale = .7]{images/object-blob.png}
 \end{frame}
 
 \begin{frame}
@@ -416,29 +417,50 @@ The CAT
   \begin{itemize}
     \item A ``tree'' is basically like a directory 
     \item It references a bunch of other trees and/or blobs (i.e. files and sub-directories)
+    \item Trees store the metadata for the objects they point to, e.g. name, permissions, and content type
   \end{itemize}
-  \includegraphics{images/object-tree.png}
+  \includegraphics[scale = .7]{images/object-tree.png}
 \end{frame}
 
 \begin{frame}
   \frametitle{Commit}
   \begin{itemize}
     \item A ``commit'' points to a single tree, marking it as what the project looked like at a certain point in time. 
+    \item Has the following components
+      \begin{itemize}
+	\item tree: The hash of a tree object that shows that the project looks like at the time of the commit
+	\item parent: The hash of the preceeding commit, or commits
+	\item author: The person that actually created the content
+	\item committer: The person that made the actual commit
+	\item comment: a description of the commit.
+      \end{itemize}
   \end{itemize}
-  \includegraphics{images/object-commit.png}
+  \includegraphics[scale = .7]{images/object-commit.png}
 \end{frame}
 
 \begin{frame}
   \frametitle{Tag}
-  \includegraphics{images/object-tag.png}
+  \begin{itemize}
+    \item A tag is used to ``annotate'' a particular object
+    \item Commonly used to designate a specific commit, for things such as releases
+  \end{itemize}
+  \includegraphics[scale = .7]{images/object-tag.png}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example}
+  \frametitle{Putting it all together}
   \includegraphics[ scale = .50 ]{images/objects-example.png}
 \end{frame}
 
-\subsubsection{Using Git}
+\begin{frame}
+  \frametitle{The index}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Branches}
+\end{frame}
+
+\subsection{Using Git}
 
 \begin{frame}
   \frametitle{Git workflow}
@@ -446,9 +468,69 @@ The CAT
 \end{frame}
 
 \begin{frame}
+  \frametitle{Changing files with git}
+  \begin{itemize}
+    \item {\tt git init} - Creates a git repository in the current working directory
+    \item {\tt git add} - Adds the specified file to the index
+    \item {\tt git rm} - Removes the file from the file system and adds the removal to the index
+      \begin{itemize}
+	\item This is important, because git will not automatically remove files that you delete.
+      \end{itemize}
+    \item {\tt git mv} - Renames the file; equivalent to {\tt mv file1 file2; git rm file1; git add file2}
+      \begin{itemize}
+	\item Remember that git doesn't track file names in a blob, so moves are tricky
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Viewing git information}
+  \begin{itemize}
+    \item {\tt git status} - Shows the status of the changed files
+    \item {\tt git diff} - Shows the difference between two files, or the changes made to a file
+    \item {\tt git log} - Shows the commit logs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Making changes to the history}
+  \begin{itemize}
+    \item {\tt git reset} - Restores the working copy to the most recent committed version
+    \item {\tt git checkout} - Restores a single file in the working copy to the most recent committed version
+    \item {\tt git commit} - Commits all the files in {\bf index} into the repository 
+    \item {\tt git revert} - Undoes the most recent commit by adding a new commit, with all the changes reverted.
+    \item {\tt git cherry-pick} - TODO
+    \item {\tt git rebase} - TODO
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Collaboration}
+  \begin{itemize}
+    \item {\tt git fetch}
+    \item {\tt git merge}
+    \item {\tt git pull}
+    \item {\tt git push}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \begin{itemize}
     \item Demo time!
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other resources}
+  \begin{itemize}
+    \item \url{http://book.git-scm.com/1\_the\_git\_object\_model.html}
+  \end{itemize}
+\end{frame}
+
+\subsection{Advanced Git}
+
+\begin{frame}
+  \frametitle{Git hooks}
 \end{frame}
 
 \end{document}
