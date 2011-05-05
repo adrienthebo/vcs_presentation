@@ -66,7 +66,8 @@ The CAT
       \begin{itemize}
 	\item agendas - RCS
 	\item CRACK - Git
-	\item intranet - Git
+	\item Intranet - Git
+	\item Puppet - Git
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -206,9 +207,19 @@ The CAT
   \begin{itemize}
     \item Behold! Another evolution!
     \item CVS was the first client-server VCS
+    \item Built upon RCS
+    \item Tracks a set of files, or a project
     \item Instead of just hacking on one file in a specific location, you check out a project
-    \item Support for project wide VCS
     \item Support for multiple users simultaneously working on one project
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applications of CVS today}
+  \begin{itemize}
+    \item Gentoo - portage
+    \item FreeBSD - ports
+    \item Various open source projects
   \end{itemize}
 \end{frame}
 
@@ -282,6 +293,8 @@ The CAT
       \begin{itemize}
 	\item Fully centralized - no offline work
 	\item Slow - network latency can increase time to work
+        \item Branches are expensive - make a full copy of the entire repository
+        \item Directly correlated, merging is a massive operation
 	\item Based on CVS
       \end{itemize}
   \end{itemize}
@@ -321,6 +334,7 @@ The CAT
       \begin{itemize}
 	\item Initial clone is costly, as it copies the entire repo
 	\item Added complexity 
+        \item Ordering commits becomes much less straightforward
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -336,7 +350,6 @@ The CAT
     \item {\bf Git} (We like git)
   \end{itemize}
 \end{frame}
-
 
 \section{Git}
 
@@ -379,11 +392,10 @@ The CAT
 \begin{frame}
   \frametitle{Implementation}
   \begin{itemize}
-    \item Written in C
-    \item More closely resembles a filesystem than a standard VCS
-      \begin{itemize}
-	\item This is what happens when you let a kernel hacker write a VCS!
-      \end{itemize}
+    \item Initially written as a ``content addressable filesystem''
+    \item Simply put, you put stuff in it, and you get a key to retrieve data
+    \item You fetch that key, you get that data
+    \item Eventually a full set of utilities were written to interact with git
     \item Has types of blob, tree, commit, and tag
     \item Objects are identified by a SHA-1 hash
   \end{itemize}
@@ -452,12 +464,43 @@ The CAT
   \includegraphics[ scale = .50 ]{images/objects-example.png}
 \end{frame}
 
+\subsection{Git concepts}
+
+\begin{frame}
+  \frametitle{The working directory}
+  \begin{itemize}
+    \item The files that are normally visible in a git controlled directory is called the working directory
+    \item Any changes made to these are applied to the current branch
+    \item Nothing is absolute until you perform a git operation on it
+    \item Effectively a scratch space
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{References}
+  \begin{itemize}
+    \item References are a way to track objects that are noteworthy
+    \item Simple a file containing a SHA1 hash
+    \item Lightweight tags are basically a reference and a tag object
+  \end{itemize}
+\end{frame}
+
 \begin{frame}
   \frametitle{The index}
+  \begin{itemize}
+    \item The index, or staging area, is where you accumulate changes before a commit
+    \item This allows you to very carefully assemble commits
+    \item This is in contrast to SVN, where performing a commit adds all changes
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Branches}
+  \begin{itemize}
+    \item Git is designed to let you have different versions of the same codebase available
+    \item This lets you break up your work into discrete chunks very easily
+    \item The working directory is only the currently checked out branch, and switching is very easy
+  \end{itemize}
 \end{frame}
 
 \subsection{Using Git}
@@ -489,6 +532,17 @@ The CAT
     \item {\tt git status} - Shows the status of the changed files
     \item {\tt git diff} - Shows the difference between two files, or the changes made to a file
     \item {\tt git log} - Shows the commit logs
+    \item {\tt git blame} - Shows the author of the every line in the file
+    \item {\tt git bisect} - Search the git history for a specific commit
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Branching and merging}
+  \begin{itemize}
+    \item {\tt git branch} - Create, show, and delete branches
+    \item {\tt git checkout} - Create and switch branches
+    \item {\tt git merge} - Merge the changes from one branch into the current branch
   \end{itemize}
 \end{frame}
 
@@ -499,31 +553,18 @@ The CAT
     \item {\tt git checkout} - Restores a single file in the working copy to the most recent committed version
     \item {\tt git commit} - Commits all the files in {\bf index} into the repository 
     \item {\tt git revert} - Undoes the most recent commit by adding a new commit, with all the changes reverted.
-    \item {\tt git cherry-pick} - TODO
-    \item {\tt git rebase} - TODO
+    \item {\tt git cherry-pick} - Applies a single commit to your current branch
+    \item {\tt git rebase} - Rewrite history
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Collaboration}
   \begin{itemize}
-    \item {\tt git fetch}
-    \item {\tt git merge}
-    \item {\tt git pull}
-    \item {\tt git push}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{itemize}
-    \item Demo time!
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Other resources}
-  \begin{itemize}
-    \item \url{http://book.git-scm.com/1\_the\_git\_object\_model.html}
+    \item {\tt git clone} - Fetches a remote git repository and checks it out
+    \item {\tt git fetch} - Fetches objects and references from a remote repository
+    \item {\tt git pull} - Fetches and merges objects and references from a remote
+    \item {\tt git push} - Sends refs and remotes to a remote repository
   \end{itemize}
 \end{frame}
 
@@ -531,6 +572,27 @@ The CAT
 
 \begin{frame}
   \frametitle{Git hooks}
+  \begin{itemize}
+    \item Git allows you to customize behavior with hooks
+      \begin{itemize}
+        \item Ensure that the code works before merging it
+        \item Deploy code elsewhere after a commit
+        \item Other actions that need to happen automatically
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The really gory details}
+  {\bf THIS IS A SLIDE}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other resources}
+  \begin{itemize}
+    \item \url{http://book.git-scm.com/1\_the\_git\_object\_model.html}
+    \item \url{http://progit.org/book/}
+  \end{itemize}
 \end{frame}
 
 \end{document}
