@@ -54,7 +54,7 @@ Why Should You Care?
 Why Should You Care?
 ====================
 
-In general, if you are writing more than a few lines of code and not using 
+In general, if you are writing more than a few lines of code and not using
 version control...
 
 **YOU ARE DOING IT WRONG.**
@@ -98,3 +98,50 @@ Early implementations of version control was done by copying files
 <% end %>
 
 This wouldn't get tedious at all!
+
+The beginning of VCS
+====================
+
+  * Initial idea of VCS came from engineering
+  * Engineers would create blueprints, and save earlier revisions
+  * If a version was not liked, it was trivial to roll back
+  * Revision control was also applied in business, law
+  * Any place where you may need to backtrack on a document, VCS will show up
+
+Concerns with VCS
+=================
+
+  * Any VCS has to deal with some basic concerns
+    * Merging changes
+    * Locking files
+    * Atomic commits
+  * Each VCS handles these concerns differently
+
+!SLIDE
+
+A T!ur of Version Control Systems
+---------------------------------
+
+
+Source Code Control System (SCCS)
+=================================
+
+  * Arguably the first VCS system available
+  * Developed by Bell Labs in 1972
+    * For some comparison, C was written in 1972 at Bell Labs as well
+  * SCCS was the dominant VCS until the advent of RCS
+  * Generally considered obsolete, and only mentioned for historical purposes
+  * Except for the storage method - still used today
+
+[Wikipedia: Source Code Control System](http://en.wikipedia.org/wiki/Source_Code_Control_System)
+
+Revision Control System (RCS)
+=======================
+
+Revision Control System (RCS)
+  * Released in 1982
+  * Created as an evolution of SCCS
+  * Stored changes of files as a series of diffs
+  * Very popular, still used today
+
+[Wikipedia: Revision Control System](http://en.wikipedia.org/wiki/Revision_Control_System)
