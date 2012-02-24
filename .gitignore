@@ -6,3 +6,5 @@ vcs_presentation.out
 vcs_presentation.pdf
 vcs_presentation.snm
 vcs_presentation.toc
+*.css
+*.html
