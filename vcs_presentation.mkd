@@ -1,0 +1,20 @@
+Version Control Systems
+=======================
+
+Making mistakes without fear
+----------------------------
+
+Adrien Thebo
+
+Introduction
+============
+
+What is Version Control?
+------------------------
+
+  * A Version Control System, or VCS, is a tool used to track changes to files
+  * Allows you to manage code or documents as you work
+    * Make changes in incremental steps
+    * View changes
+    * Revert errors
+  * Greatly simplifies collaboration
