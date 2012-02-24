@@ -1,16 +1,22 @@
+title: Version Control Systems
+author: Adrien Thebo
+copyright: Copyright 2012 Adrien Thebo, licensed under Creative Commons BY/NC/SA
+duration: 120
+code-engine: coderay
+
 Version Control Systems
 =======================
 
-Making mistakes without fear
-----------------------------
+Making dumb mistakes faster, without fear
+-----------------------------------------
 
-Adrien Thebo
+!SLIDE
 
 Introduction
-============
+------------
 
 What is Version Control?
-------------------------
+========================
 
   * A Version Control System, or VCS, is a tool used to track changes to files
   * Allows you to manage code or documents as you work
@@ -18,3 +24,75 @@ What is Version Control?
     * View changes
     * Revert errors
   * Greatly simplifies collaboration
+
+Why Should You Care?
+====================
+
+  * Try out experimental ideas without destroying your code base
+  * Resolve mistakes by switching to the last working copy
+  * Find the change that introduced a bug
+  * Have VCS merge your changes with classmates instead of by hand
+  * Use VCS as a backup system!
+    * "Wait, you **didn't** want that file deleted?"
+
+Why Should You Care?
+====================
+
+  * Any sane developer uses VCS
+    * Github
+    * Gitorious
+    * Mercurial
+    * code.googte.com
+    * Sourceforge
+    * et cetera...
+  * Version control systems are the life blood of open source
+    * Reduces barrier to entry
+    * Easier to manage contributions
+
+Why Should You Care?
+====================
+
+In general, if you are writing more than a few lines of code and not using 
+version control...
+
+**YOU ARE DOING IT WRONG.**
+
+**PERIOD.**
+
+!SLIDE
+
+Background
+----------
+
+Before VCS
+==========
+
+  * Living dangerously!
+
+<% code do %>
+    vim really_complex_algorithm.c
+<% end %>
+
+*three hours later*
+
+<% code do %>
+    rm -rf *
+<% end %>
+
+Whoops.
+
+Do It Yourself VCS
+==================
+
+Early implementations of version control was done by copying files
+
+<% code do %>
+    vim really_complex_algorithm.c
+    cp really_complex_algorithm.c really_complex_algorithm.c.1
+    vim really_complex_algorithm.c
+    cp really_complex_algorithm.c really_complex_algorithm.c.2
+    vim really_complex_algorithm.c
+    cp really_complex_algorithm.c really_complex_algorithm.c.3
+<% end %>
+
+This wouldn't get tedious at all!
