@@ -71,13 +71,13 @@ Before VCS
 
 Living dangerously!
 
-<% code do %>
+<% coderay :lang => :sh do %>
     vim really_complex_algorithm.c
 <% end %>
 
 *three hours later:*
 
-<% code do %>
+<% coderay :lang => :sh do %>
     rm -rf *
 <% end %>
 
@@ -88,7 +88,7 @@ Do It Yourself VCS
 
 Early implementations of version control was done by copying files
 
-<% code do %>
+<% coderay :lang => :sh do %>
     vim really_complex_algorithm.c
     cp really_complex_algorithm.c really_complex_algorithm.c.1
     vim really_complex_algorithm.c
@@ -160,7 +160,7 @@ Pros and Cons of RCS
     * No security mechanisms - anyone can tamper with diffs
     * Branching sucks - everybody just locks the file
 
-<% code do %>
+<% coderay :lang => :sh do %>
   co -l agenda.dog
   vim agenda.dog
   ci -u agenda.dog
@@ -331,21 +331,24 @@ Characteristics of Git
 
 !SLIDE
 
-Git as Magick
--------------
+Git as Magick, Part I
+---------------------
+
+Single Player Git
+-----------------
 
 Git - Creating a Project
 ========================
 
-<% code do %>
-% git init
+<% coderay :lang => :sh do %>
+> git init
 Initialized empty Git repository in /private/vcs_presentation/.git/
 <% end %>
 
 This creates a new project in the current directory.
 
-<% code do %>
-% ls -la
+<% coderay :lang => :sh do %>
+> ls -la
 total 264
 drwx------  13 adrien  admin    442 Feb 24 17:52 ./
 drwx------   9 adrien  admin    306 Feb 23 22:41 ../
@@ -358,15 +361,15 @@ drwx------   5 adrien  admin    170 Feb 24 17:45 images/
 Git - adding a file
 ===================
 
-<% code do %>
+<% coderay :lang => :sh do %>
 git add example
 <% end %>
 
 Git - seeing the project status
 ===============================
 
-<% code do %>
-% git status
+<% coderay :lang => :sh do %>
+> git status
 # On branch master
 #
 # Initial commit
@@ -381,8 +384,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 Git - seeing what content changed
 =================================
 
-<% code do %>
-% git diff example
+<% coderay :lang => :sh do %>
+> git diff example
 diff --git c/example i/example
 new file mode 100644
 index 0000000..0996042
@@ -395,8 +398,8 @@ index 0000000..0996042
 Git - making your changes permanent
 ===================================
 
-<% code do %>
-% git commit -m 'Check out my awesome commit!'
+<% coderay :lang => :sh do %>
+> git commit -m 'Check out my awesome commit!'
 [master (root-commit) 6735123] Check out my awesome commit!
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 example
@@ -413,8 +416,8 @@ Kind of.
 Git - viewing the log of changes
 ================================
 
-<% code do %>
-% git log
+<% coderay :lang => :sh do %>
+> git log
 commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
 Author: Adrien Thebo <adrien@puppetlabs.com>
 Date:   Fri Feb 24 17:59:22 2012 -0800
@@ -424,8 +427,8 @@ Date:   Fri Feb 24 17:59:22 2012 -0800
 
 ** OR **
 
-<% code do %>
-% git log --oneline
+<% coderay :lang => :sh do %>
+> git log --oneline
 697f7f4 Fixed a bug in NoteLineCount... not seriously...    [permalink]
 ccf7859 better grepping
 44897dd FIX
@@ -437,8 +440,8 @@ ccf7859 better grepping
 Git - viewing what actually changed
 ===================================
 
-<% code do %>
-% git whatchanged -1
+<% coderay :lang => :sh do %>
+> git whatchanged -1
 commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
 Author: Adrien Thebo <adrien@puppetlabs.com>
 Date:   Fri Feb 24 18:02:22 2012 -0800
@@ -450,8 +453,8 @@ Date:   Fri Feb 24 18:02:22 2012 -0800
 
 **OR**
 
-<% code do %>
-% git whatchanged -1 -p
+<% coderay :lang => :sh do %>
+> git whatchanged -1 -p
 commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
 Author: Adrien Thebo <adrien@puppetlabs.com>
 Date:   Fri Feb 24 18:02:22 2012 -0800
@@ -465,6 +468,79 @@ index 0000000..0996042
 +++ b/example
 @@ -0,0 +1 @@
 +Fri Feb 24 18:00:29 PST 2012
+<% end %>
+
+!SLIDE
+
+Git as Magick, Part II
+----------------------
+
+Multiplayer Git with Github
+---------------------------
+
+Github - Copying a project locally
+==================================
+
+Cloning a project readonly
+--------------------------
+
+<% coderay :lang => :sh do %>
+> git clone git://github.com/adrienthebo/worstprogramever
+Cloning into worstprogramever...
+remote: Counting objects: 20, done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 20 (delta 5), reused 9 (delta 1)
+Receiving objects: 100% (20/20), done.
+Resolving deltas: 100% (5/5), done.
+<% end %>
+
+Github - Cloning a project read/write
+----------------------------
+
+<% coderay :lang => :sh do %>
+> git clone git@github.com:adrienthebo/worstprogramever
+Cloning into worstprogramever...
+remote: Counting objects: 20, done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 20 (delta 5), reused 9 (delta 1)
+Receiving objects: 100% (20/20), done.
+Resolving deltas: 100% (5/5), done.
+<% end %>
+
+Note the difference between the URLs; the former uses the git protocol, the
+latter uses SSH.
+
+Github - Making changes to a project
+====================================
+
+### Make your changes as normal...
+
+<% coderay :lang => :sh do %>
+> cd worstprogramever
+> ls
+Makefile	fail.c
+> mvim README.markdown
+> git add README.markdown
+> git st
+## master
+A  README.markdown
+> git ci
+[master 3534eef] Added a README!
+ 1 files changed, 25 insertions(+), 0 deletions(-)
+ create mode 100644 README.markdown
+<% end %>
+
+### And then run `git push`
+
+<% coderay :lang => :sh do %>
+> git push
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 605 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To git@github.com:adrienthebo/worstprogramever
+   29e5bcd..3534eef  master -> master
 <% end %>
 
 !SLIDE
@@ -609,7 +685,7 @@ Making changes to the history
 =============================
 
   * `git reset` - Restores the working copy to the most recent committed version
-  * `git checkout` - Restores a single file in the working copy to the msot recent committed version
+  * `git checkout` - Restores a single file in the working copy to the most recent committed version
   * `git commit` - Commits all the files in **index** into the repository
   * `git revert` - Undoes the most recent commit by adding a new commit, with all the changes reverted
   * `git cherry-pick` - Applies a single commit to your current branch
