@@ -479,6 +479,36 @@ index 0000000..0996042
 Git as Magick, Part II
 ----------------------
 
+Branching and Merging
+---------------------
+
+Git - Branching and Merging, a visual representation
+====================================================
+
+    * fd1685b Adrien Thebo 3 months ago snaaarky comments. 
+    * f461e29 Adrien Thebo 3 months ago Sketchy urls. 
+    * a3cca2d Adrien Thebo 3 months ago Added gpg. 
+    * c0cfcdd Adrien Thebo 3 months ago PLURALIZATION! 
+    *   edf37aa Adrien Thebo 3 months ago Merge branch 'master' of oubliette.cat.pdx.edu:learning_unix 
+    |\  
+    | * fda5612 Adrien Thebo 3 months ago Block quoting quotes 
+    | * 8d7ca85 Adrien Thebo 3 months ago finch tries to do css. finch doesn't know what he's doing. 
+    | * 27e6cf2 Adrien Thebo 3 months ago Usage of backticks instead of single quotes 
+    | * fc72992 Adrien Thebo 3 months ago Added project euler to grab bag 
+    | * 2f4b1b7 Adrien Thebo 3 months ago Added challenges page. 
+    | * c52996f Adrien Thebo 3 months ago Brief introductions to the sections on the index 
+    * | 48d3834 Adrien Thebo 3 months ago Definitions or some shit like that. 
+    |/  
+    * 8c02f3d Adrien Thebo 3 months ago Filled out command descriptions for shell survival guide 
+    * ffe5bb6 Adrien Thebo 3 months ago Renamed preamble to reasoning 
+    * 8851dae Adrien Thebo 3 months ago cleanup on redirection 
+
+
+!SLIDE
+
+Git as Magick, Part III
+-----------------------
+
 Multiplayer Git with Github
 ---------------------------
 
