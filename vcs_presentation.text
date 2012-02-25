@@ -481,8 +481,7 @@ Multiplayer Git with Github
 Github - Copying a project locally
 ==================================
 
-Cloning a project readonly
---------------------------
+### Cloning a project readonly
 
 <% coderay :lang => :sh do %>
 > git clone git://github.com/adrienthebo/worstprogramever
@@ -494,8 +493,7 @@ Receiving objects: 100% (20/20), done.
 Resolving deltas: 100% (5/5), done.
 <% end %>
 
-Github - Cloning a project read/write
-----------------------------
+### Github - Cloning a project read/write
 
 <% coderay :lang => :sh do %>
 > git clone git@github.com:adrienthebo/worstprogramever
@@ -547,6 +545,10 @@ To git@github.com:adrienthebo/worstprogramever
 
 Git internals
 -------------
+
+No one part of git is especially complicated.
+
+Too bad there are so many parts...
 
 Implementation
 ==============
