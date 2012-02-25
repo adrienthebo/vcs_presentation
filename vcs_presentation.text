@@ -378,6 +378,38 @@ Git - seeing the project status
 nothing added to commit but untracked files present (use "git add" to track)
 <% end %>
 
+Git - seeing what content changed
+=================================
+
+<% code do %>
+% git diff example
+diff --git c/example i/example
+new file mode 100644
+index 0000000..0996042
+--- /dev/null
++++ i/example
+@@ -0,0 +1 @@
++Fri Feb 24 18:00:29 PST 2012
+<% end %>
+
+Git - making your changes permanent
+===================================
+
+<% code do %>
+% git commit -m 'Check out my awesome commit!'
+[master (root-commit) 6735123] Check out my awesome commit!
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 example
+<% end %>
+
+> But I'm afraid of commitment!
+
+**GET OVER IT.**
+
+With git, commit early, commit often. You can fix it after the fact.
+
+Kind of.
+
 !SLIDE
 
 Git internals
@@ -497,13 +529,13 @@ Changing files with git
   * `git add` - Adds the specified file to the index
   * `git rm` - Removes the file from the file system and adds the removal to the index
     * This is important, because git will not automatically remove files that you delete.
-  * `git mv` - Renames the file - equivalent to `mv file1 file2; git rm file1; git add file2
+  * `git mv` - Renames the file - equivalent to `mv file1 file2; git rm file1; git add file2`
     * Remember that git doesn't track file names in a blob, so moves are tricky
 
 Viewing git information
 =======================
 
-  * `git status` - Shows the status of teh changed files
+  * `git status` - Shows the status of the changed files
   * `git diff` - Shows the difference between two files, or the changes made to a file
   * `git log` - Shows the commit logs
   * `git blame` - Shows the author of every line in the file
