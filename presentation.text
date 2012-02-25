@@ -1,16 +1,20 @@
 title: Version Control Systems
 author: Adrien Thebo
-copyright: Copyright 2012 Adrien Thebo, licensed under Creative Commons BY/NC/SA
+Copyright 2012 Adrien Thebo, licensed under Creative Commons BY/NC/SA
 duration: 120
 code-engine: coderay
 
-Version Control Systems
-=======================
+Version Control Systems, Git, and You
+=====================================
 
 Making dumb mistakes faster, without fear
 -----------------------------------------
 
 ![Coffee](./images/drink_coffee.jpg)
+
+Adrien Thebo
+
+&copy; 2012, licensed under [Creative Commons BY/NC/SA](http://creativecommons.org/licenses/by-nc-sa/3.0/us/)
 
 !SLIDE
 
@@ -44,7 +48,7 @@ Why Should You Care?
     * Github
     * Gitorious
     * Mercurial
-    * code.googte.com
+    * code.google.com
     * Sourceforge
     * et cetera...
   * Version control systems are the life blood of open source
@@ -717,10 +721,20 @@ Git hooks
 The really gory details
 =======================
 
-**THIS IS A SLIDE**
+This slide will be completed someday.
 
-Other resources
-===============
+HAHAHAHA no.
 
-  * http://book-git-scm.com/1_the_git_object_model.html
-  * http://progit.org/book
+References/Shit I Blatantly Ripped Off
+======================================
+
+  * [The Git Community Book](http://book.git-scm.com/)
+  * [Pro Git](http://progit.org/book)
+
+Find this Presentation
+======================
+
+  * [Github](http://github.com/adrienthebo/vcs_presentation)
+  * [Hosted Presentation](http://somethingsinistral.net/presentations/vcs/presentation.html)
+  * [Single File Presentation](http://somethingsinistral.net/presentations/vcs/presentation.pdf.html)
+
