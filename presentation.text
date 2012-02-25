@@ -185,8 +185,8 @@ Modern VCS
   * No way to look at both of the changes without black magic and/or shell scripts
   * Technologies started coming out to deal with this
 
-Concurrent Verstion System (CVS)
-================================
+Concurrent Version System (CVS)
+===============================
 
   * Behold! Another evolution!
   * CVS was the first client-server VCS
@@ -207,14 +207,14 @@ Pros and Cons of CVS
 
   * Advantages
     * ...I got nothing.
+    * CVS was used because it was the first, not because it was good.
   * Disadvantages
-    * Where do we start?
     * No moving/renaming of directories
     * No versioning of symbolic links
     * No unicode
     * No atomic commits
       * It'll commit enough changes to break everything!
-    * CVS was used because it was the first, not because it was good.
+    * Et cetera
 
 !SLIDE
 
@@ -309,8 +309,9 @@ Git
 Introduction to Git
 ===================
 
-> "I'm an egotistical bastard, and I name all my projects after myself. First Linux, not git."
-> - Linus Torvalds
+> "I'm an egotistical bastard, and I name all my projects after myself. First Linux, now git."
+
+*Linus Torvalds*
 
   * Git is the heavyweight of the DVCS world
   * Open source DVCS created by Linux Torvalds, creator of the Linux kernel
@@ -429,7 +430,7 @@ Date:   Fri Feb 24 17:59:22 2012 -0800
     better grepping
 <% end %>
 
-** OR **
+**OR**
 
 <% coderay :lang => :sh do %>
 > git log --oneline
