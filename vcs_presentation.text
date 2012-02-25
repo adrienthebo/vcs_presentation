@@ -410,6 +410,63 @@ With git, commit early, commit often. You can fix it after the fact.
 
 Kind of.
 
+Git - viewing the log of changes
+================================
+
+<% code do %>
+% git log
+commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
+Author: Adrien Thebo <adrien@puppetlabs.com>
+Date:   Fri Feb 24 17:59:22 2012 -0800
+
+    better grepping
+<% end %>
+
+** OR **
+
+<% code do %>
+% git log --oneline
+697f7f4 Fixed a bug in NoteLineCount... not seriously...    [permalink]
+ccf7859 better grepping
+44897dd FIX
+809722b It's getting late.
+2ed809e Reorganize images
+5e24310 pgsql is more strict, increase the hackiness up to 11
+<% end %>
+
+Git - viewing what actually changed
+===================================
+
+<% code do %>
+% git whatchanged -1
+commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
+Author: Adrien Thebo <adrien@puppetlabs.com>
+Date:   Fri Feb 24 18:02:22 2012 -0800
+
+    Check out my awesome commit!
+
+:000000 100644 0000000... 0996042... A  example
+<% end %>
+
+**OR**
+
+<% code do %>
+% git whatchanged -1 -p
+commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
+Author: Adrien Thebo <adrien@puppetlabs.com>
+Date:   Fri Feb 24 18:02:22 2012 -0800
+
+    Check out my awesome commit!
+
+diff --git a/example b/example
+new file mode 100644
+index 0000000..0996042
+--- /dev/null
++++ b/example
+@@ -0,0 +1 @@
++Fri Feb 24 18:00:29 PST 2012
+<% end %>
+
 !SLIDE
 
 Git internals
