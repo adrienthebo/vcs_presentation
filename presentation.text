@@ -486,24 +486,151 @@ Branching and Merging
 Git - Branching and Merging, a visual representation
 ====================================================
 
-    * fd1685b Adrien Thebo 3 months ago snaaarky comments. 
-    * f461e29 Adrien Thebo 3 months ago Sketchy urls. 
-    * a3cca2d Adrien Thebo 3 months ago Added gpg. 
-    * c0cfcdd Adrien Thebo 3 months ago PLURALIZATION! 
-    *   edf37aa Adrien Thebo 3 months ago Merge branch 'master' of oubliette.cat.pdx.edu:learning_unix 
-    |\  
-    | * fda5612 Adrien Thebo 3 months ago Block quoting quotes 
-    | * 8d7ca85 Adrien Thebo 3 months ago finch tries to do css. finch doesn't know what he's doing. 
-    | * 27e6cf2 Adrien Thebo 3 months ago Usage of backticks instead of single quotes 
-    | * fc72992 Adrien Thebo 3 months ago Added project euler to grab bag 
-    | * 2f4b1b7 Adrien Thebo 3 months ago Added challenges page. 
-    | * c52996f Adrien Thebo 3 months ago Brief introductions to the sections on the index 
-    * | 48d3834 Adrien Thebo 3 months ago Definitions or some shit like that. 
-    |/  
-    * 8c02f3d Adrien Thebo 3 months ago Filled out command descriptions for shell survival guide 
-    * ffe5bb6 Adrien Thebo 3 months ago Renamed preamble to reasoning 
-    * 8851dae Adrien Thebo 3 months ago cleanup on redirection 
+<% coderay :lang => :sh do %>
+    * fd1685b Adrien Thebo 3 months ago snaaarky comments.
+    * f461e29 Adrien Thebo 3 months ago Sketchy urls.
+    * a3cca2d Adrien Thebo 3 months ago Added gpg.
+    * c0cfcdd Adrien Thebo 3 months ago PLURALIZATION!
+    *   edf37aa Adrien Thebo 3 months ago Merge branch 'master' of oubliette.cat.pdx.edu:learning_unix
+    |\
+    | * fda5612 Adrien Thebo 3 months ago Block quoting quotes
+    | * 8d7ca85 Adrien Thebo 3 months ago finch tries to do css. finch doesn't know what he's doing.
+    | * 27e6cf2 Adrien Thebo 3 months ago Usage of backticks instead of single quotes
+    | * fc72992 Adrien Thebo 3 months ago Added project euler to grab bag
+    | * 2f4b1b7 Adrien Thebo 3 months ago Added challenges page.
+    | * c52996f Adrien Thebo 3 months ago Brief introductions to the sections on the index
+    * | 48d3834 Adrien Thebo 3 months ago Definitions or some shit like that.
+    |/
+    * 8c02f3d Adrien Thebo 3 months ago Filled out command descriptions for shell survival guide
+    * ffe5bb6 Adrien Thebo 3 months ago Renamed preamble to reasoning
+    * 8851dae Adrien Thebo 3 months ago cleanup on redirection
+<% end %>
 
+Git - Looking at current branches
+=================================
+
+<% coderay :lang => :sh do %>
+> cd src/facter
+> git branch
+* 1.6.x
+  external_fact_support_full
+  master
+  proto/master/docstrings
+  ticket/1.6.x/12813-redirect_lspci_stderr
+  ticket/11660-sshfp_and_ssh_rspec
+  ticket/master/2157-external_fact_support
+  ticket/master/4561-add_structured_data
+<% end %>
+
+I'm currently on the 1.6.x branch.
+
+The 'master' branch is the default branch.
+
+The ticket/* branches are *feature* branches
+
+Git - Making a new branch
+=========================
+
+<% coderay :lang => :sh do %>
+> git branch new_feature_branch
+<% end %>
+
+This creates the branch 'new_feature_branch'
+
+<% coderay :lang => :sh do %>
+> git branch
+* 1.6.x
+  external_fact_support_full
+  master
+  new_feature_branch  <------ We made a new branch!
+  proto/master/docstrings
+  ticket/1.6.x/12813-redirect_lspci_stderr
+  ticket/11660-sshfp_and_ssh_rspec
+  ticket/master/2157-external_fact_support
+  ticket/master/4561-add_structured_data
+<% end %>
+
+Note that we're still on the 1.6.x branch
+
+Git - Making a new branch
+=========================
+
+Alternately...
+
+<% coderay :lang => :sh do %>
+> git checkout -b another_feature_branch
+Switched to a new branch 'another_feature_branch'
+<% end %>
+
+This creates a new branch and switches to it.
+
+<% coderay :lang => :sh do %>
+> git branch
+  1.6.x
+* another_feature_branch  <---- Another new branch! Note the asterisk!
+  external_fact_support_full
+  master
+  new_feature_branch
+  proto/master/docstrings
+  ticket/1.6.x/12813-redirect_lspci_stderr
+  ticket/11660-sshfp_and_ssh_rspec
+  ticket/master/2157-external_fact_support
+  ticket/master/4561-add_structured_data
+<% end %>
+
+The asterisk indicates that this is our current branch.
+
+Git - Working in a branch
+=========================
+
+  * When working in a branch, you would work as you would normally
+  * This time, you have two different versions of history
+  * Keep different tasks isolated
+
+Git - Merging a branch
+======================
+
+In this example, I'll merge the branch 'duplicity' into the main branch,
+'master'.
+
+<% coderay :lang => :sh do %>
+> git branch
+* duplicity
+  ganeti
+  master
+> git checkout master
+Switched to branch 'master'
+% git merge --no-ff duplicity
+Merge made by recursive.
+ dist/duplicity/manifests/cron.pp |   70 ++++++++++++++++++++++++++++++++-----
+ 1 files changed, 60 insertions(+), 10 deletions(-)
+<% end %>
+
+The resulting history looks like this:
+
+<% coderay :lang => :sh do %>
+    *   413e4a7 Adrien Thebo 3 minutes ago Merge branch 'duplicity'
+    |\
+    | * d6b7efc Adrien Thebo 3 hours ago Force removal of stale backup files
+    | * 39d6423 Adrien Thebo 4 hours ago Echo date to duplicity last run file instead of touching
+    | * 14f7e30 Adrien Thebo 4 hours ago Remove unneeded inline_template from duplicity::cron
+    | * affa757 Adrien Thebo 4 hours ago Add incremental, full backups + cleanups for duplicity
+    |/
+    * f83a636 Adrien Thebo 5 hours ago Tyop in duplicity for gpg agent info
+<% end %>
+
+Git - Why Would You Use Branches?
+=================================
+
+  * Branches are incredibly powerful
+  * They allow you to isolate different tasks
+  * Do normal development on master
+  * Try experimental ideas in a branch
+
+Many projects require features be implemented in a branch
+
+  * Makes integrating features easier
+  * Work on big features without interfering with normal operations
 
 !SLIDE
 
@@ -576,6 +703,8 @@ To git@github.com:adrienthebo/worstprogramever
    29e5bcd..3534eef  master -> master
 <% end %>
 
+This uploads your branch to the remote server, so you can share it with people.
+
 !SLIDE
 
 Git internals
@@ -584,6 +713,11 @@ Git internals
 No one part of git is especially complicated.
 
 Too bad there are so many parts...
+
+**WARNING**
+
+This stuff is complex, and isn't necessary to get up and running. Don't worry
+if it isn't immediately clear.
 
 Implementation
 ==============
@@ -761,6 +895,7 @@ References/Shit I Blatantly Ripped Off
 
   * [The Git Community Book](http://book.git-scm.com/)
   * [Pro Git](http://progit.org/book)
+  * [Git for Designers](http://hoth.entp.com/output/git_for_designers.html)
 
 Find this Presentation
 ======================
