@@ -297,11 +297,11 @@ TODO
 
 ## The inspiration for Git
 
+> Take CVS as an example of what not to do; if in doubt, make the exact opposite decision.
+
   * Git is a remarkable tool that had to fulfill a difficult set of obligations
   * Track the entire kernel history, with incredible amounts of information
   * Needed to be small, fast, and powerful
-
-> Take CVS as an example of what not to do; if in doubt, make the exact opposite decision.
 
 ## Characteristics of Git
 
