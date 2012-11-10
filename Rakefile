@@ -9,7 +9,7 @@ end
 
 require 'tmpdir'
 desc 'Deploy to gh-pages'
-task :deploy do
+task :deploy => [:build] do
 
   Dir.mktmpdir do |tmp|
     commands = <<-EOS
@@ -17,8 +17,7 @@ task :deploy do
       git checkout gh-pages
       cp -r #{tmp}/output/* .
       cp presentation.html index.html
-      git add images
-      git add index.html
+      git add index.html presentation.html images
       git commit -m 'Update'
       git push
       git checkout master
