@@ -17,7 +17,9 @@ task :deploy do
       git checkout gh-pages
       cp -r #{tmp}/output/* .
       cp presentation.html index.html
-      git commit -a -m 'Update'
+      git add images
+      git add index.html
+      git commit -m 'Update'
       git push
       git checkout master
     EOS
