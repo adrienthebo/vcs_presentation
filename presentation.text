@@ -1,28 +1,22 @@
 title: Version Control Systems
 author: Adrien Thebo
-Copyright 2012 Adrien Thebo, licensed under Creative Commons BY/NC/SA
 duration: 120
-code-engine: coderay
 
-Version Control Systems, Git, and You
-=====================================
+## Version Control Systems
 
-Making dumb mistakes faster, without fear
------------------------------------------
+### Making dumb mistakes faster, without fear
 
 ![Coffee](./images/drink_coffee.jpg)
 
 Adrien Thebo
 
-&copy; 2012, licensed under [Creative Commons BY/NC/SA](http://creativecommons.org/licenses/by-nc-sa/3.0/us/)
+&copy; 2012 Adrien Thebo [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/us/)
 
 !SLIDE
 
-Introduction
-------------
+# Introduction
 
-What is Version Control?
-========================
+## What is Version Control?
 
   * A Version Control System, or VCS, is a tool used to track changes to files
   * Allows you to manage code or documents as you work
@@ -31,8 +25,7 @@ What is Version Control?
     * Revert errors
   * Greatly simplifies collaboration
 
-Why Should You Care?
-====================
+## Why Should You Care?
 
   * Try out experimental ideas without destroying your code base
   * Resolve mistakes by switching to the last working copy
@@ -41,8 +34,7 @@ Why Should You Care?
   * Use VCS as a backup system!
     * "Wait, you **didn't** want that file deleted?"
 
-Why Should You Care?
-====================
+## Why Should You Care?
 
   * Any sane developer uses VCS
     * Github
@@ -55,8 +47,7 @@ Why Should You Care?
     * Reduces barrier to entry
     * Easier to manage contributions
 
-Why Should You Care?
-====================
+## Why Should You Care?
 
 In general, if you are writing more than a few lines of code and not using
 version control...
@@ -67,44 +58,34 @@ version control...
 
 !SLIDE
 
-Background
-----------
+# Background
 
-Before VCS
-==========
+## Before VCS
 
 Living dangerously!
 
-<% coderay :lang => :sh do %>
-    vim really_complex_algorithm.c
-<% end %>
+    nano really_complex_algorithm.c
 
 *three hours later:*
 
-<% coderay :lang => :sh do %>
     rm -rf *
-<% end %>
 
 Whoops.
 
-Do It Yourself VCS
-==================
+## Do It Yourself VCS
 
 Early implementations of version control was done by copying files
 
-<% coderay :lang => :sh do %>
-    vim really_complex_algorithm.c
+    nano really_complex_algorithm.c
     cp really_complex_algorithm.c really_complex_algorithm.c.1
-    vim really_complex_algorithm.c
+    nano really_complex_algorithm.c
     cp really_complex_algorithm.c really_complex_algorithm.c.2
-    vim really_complex_algorithm.c
+    nano really_complex_algorithm.c
     cp really_complex_algorithm.c really_complex_algorithm.c.3
-<% end %>
 
 This wouldn't get tedious at all!
 
-The beginning of VCS
-====================
+## The beginning of VCS
 
   * Initial idea of VCS came from engineering
   * Engineers would create blueprints, and save earlier revisions
@@ -112,8 +93,7 @@ The beginning of VCS
   * Revision control was also applied in business, law
   * Any place where you may need to backtrack on a document, VCS will show up
 
-Concerns with VCS
-=================
+## Requirements for VCS
 
   * Any VCS has to deal with some basic concerns
     * Merging changes
@@ -123,12 +103,9 @@ Concerns with VCS
 
 !SLIDE
 
-A Tour of Version Control Systems
----------------------------------
+# A Tour of Version Control Systems
 
-
-Source Code Control System (SCCS)
-=================================
+## Source Code Control System (SCCS)
 
   * Arguably the first VCS system available
   * Developed by Bell Labs in 1972
@@ -139,8 +116,7 @@ Source Code Control System (SCCS)
 
 [Wikipedia: Source Code Control System](http://en.wikipedia.org/wiki/Source_Code_Control_System)
 
-Revision Control System (RCS)
-=======================
+## Revision Control System (RCS)
 
   * Revision Control System (RCS)
     * Released in 1982
@@ -150,8 +126,7 @@ Revision Control System (RCS)
 
 [Wikipedia: Revision Control System](http://en.wikipedia.org/wiki/Revision_Control_System)
 
-Pros and Cons of RCS
-====================
+## Pros and Cons of RCS
 
   * Advantages
     * Dirt simple
@@ -164,19 +139,17 @@ Pros and Cons of RCS
     * No security mechanisms - anyone can tamper with diffs
     * Branching sucks - everybody just locks the file
 
-<% coderay :lang => :sh do %>
-  co -l agenda.dog
-  vim agenda.dog
-  ci -u agenda.dog
-<% end %>
+## RCS in action
+
+    co -l agenda.txt <-- check out and lock a file
+    nano agenda.txt
+    ci -u agenda.txt <-- check in and unlock a file
 
 !SLIDE
 
-Centralized VCS
----------------
+# Centralized VCS
 
-Modern VCS
-==========
+## Modern VCS
 
   * While early VCS systems were important, they were still lacking
   * No real support for multiple users
@@ -185,8 +158,7 @@ Modern VCS
   * No way to look at both of the changes without black magic and/or shell scripts
   * Technologies started coming out to deal with this
 
-Concurrent Version System (CVS)
-===============================
+## Concurrent Version System (CVS)
 
   * Behold! Another evolution!
   * CVS was the first client-server VCS
@@ -195,42 +167,41 @@ Concurrent Version System (CVS)
   * Instead of just hacking on one file in a specific location, you check out a project
   * Support for multiple users simultaneously working on one project
 
-Applications of CVS Today
-=========================
+## Applications of CVS Today
 
-  * Gentoo - portage
-  * FreeBSD - ports
-  * Various open source projects
+  * While CVS is largely obsolete, a few projects still use it today
+  * Examples:
+    * Gentoo - portage
+    * FreeBSD - ports
+    * Various open source projects
 
-Pros and Cons of CVS
-====================
+## Pros and Cons of CVS
 
   * Advantages
-    * ...I got nothing.
+    * ...
+    * ...
     * CVS was used because it was the first, not because it was good.
   * Disadvantages
     * No moving/renaming of directories
     * No versioning of symbolic links
     * No unicode
     * No atomic commits
+      * If a commit fails halfway through, the project might be inconsistent
       * It'll commit enough changes to break everything!
     * Et cetera
 
 !SLIDE
 
-SVN
----
+# SVN
 
-Apache Subversion (SVN)
-=======================
+## Apache Subversion (SVN)
 
   * Since CVS sucked so much, people wanted an alternative
   * SVN was designed as CVS without the problems
   * Widely adopted by the open source community
   * Support for a wide number of features
 
-SVN Features
-============
+## Features of SVN
 
   * Support for Properties
     * On the fly keywording in the source - note the last changed date in a comment
@@ -241,13 +212,32 @@ SVN Features
   * Atomic commits
   * Sane file locking
 
-Example SVN Structure
-=====================
+## SVN Terms
+
+  * **trunk**
+  * **branches**
+  * **tags**
+
+## Example SVN Structure
 
 ![svn](./images/svn/Subversion_project_visualization.png)
 
-Pros and Cons of SVN
-====================
+  1. Initial commit to trunk
+  2. Code branched from trunk
+  3. Change made to branch
+  4. Branch merged to trunk
+  5. Trunk copied into a tag
+  6. Code branched from trunk into branch A
+  7. Code branched from tag into branch B
+  8. Change made to branch B
+  9. Change made to branch A
+  10. Branch B merged into trunk
+  11. Trunk merged back into branch A
+  12. Branch A merged into trunk
+  13. Trunk copied into a tag
+  14. Change made to trunk
+
+## Pros and Cons of SVN
 
   * Advantages
     * The most widely used VCS today
@@ -345,71 +335,59 @@ Single Player Git
 Git - Creating a Project
 ========================
 
-<% coderay :lang => :sh do %>
-> git init
-Initialized empty Git repository in /private/vcs_presentation/.git/
-<% end %>
+    > git init
+    Initialized empty Git repository in /private/vcs_presentation/.git/
 
 This creates a new project in the current directory.
 
-<% coderay :lang => :sh do %>
-> ls -la
-total 264
-drwx------  13 adrien  admin    442 Feb 24 17:52 ./
-drwx------   9 adrien  admin    306 Feb 23 22:41 ../
-drwx------  15 adrien  admin    510 Feb 24 17:52 .git/ <--- git init creates this file
--rw-------   1 adrien  admin    249 Feb 24 17:45 Makefile
-drwx------   5 adrien  admin    170 Feb 24 17:45 images/
--rw-------   1 adrien  admin  14330 Feb 24 17:52 vcs_presentation.text
-<% end %>
+    > ls -la
+    total 264
+    drwx------  13 adrien  admin    442 Feb 24 17:52 ./
+    drwx------   9 adrien  admin    306 Feb 23 22:41 ../
+    drwx------  15 adrien  admin    510 Feb 24 17:52 .git/ <--- git init creates this file
+    -rw-------   1 adrien  admin    249 Feb 24 17:45 Makefile
+    drwx------   5 adrien  admin    170 Feb 24 17:45 images/
+    -rw-------   1 adrien  admin  14330 Feb 24 17:52 vcs_presentation.text
 
 Git - adding a file
 ===================
 
-<% coderay :lang => :sh do %>
-git add example
-<% end %>
+    git add example
 
 Git - seeing the project status
 ===============================
 
-<% coderay :lang => :sh do %>
-% git status
-# On branch master
-# Changes to be committed:
-#   (use "git reset HEAD <file>..." to unstage)
-#
-#	new file:   src/foocity/tile/TileCollection.java
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	src/foocity/grid/GridLoader.java
-<% end %>
+    % git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #	new file:   src/foocity/tile/TileCollection.java
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #	src/foocity/grid/GridLoader.java
 
 Git - seeing what content changed
 =================================
 
-<% coderay :lang => :sh do %>
-> git diff example
-diff --git c/example i/example
-new file mode 100644
-index 0000000..0996042
---- /dev/null
-+++ i/example
-@@ -0,0 +1 @@
-+Fri Feb 24 18:00:29 PST 2012
-<% end %>
+    > git diff example
+    diff --git c/example i/example
+    new file mode 100644
+    index 0000000..0996042
+    --- /dev/null
+    +++ i/example
+    @@ -0,0 +1 @@
+    +Fri Feb 24 18:00:29 PST 2012
 
 Git - making your changes permanent
 ===================================
 
-<% coderay :lang => :sh do %>
-> git commit -m 'Check out my awesome commit!'
-[master (root-commit) 6735123] Check out my awesome commit!
- 1 files changed, 1 insertions(+), 0 deletions(-)
- create mode 100644 example
-<% end %>
+    > git commit -m 'Check out my awesome commit!'
+    [master (root-commit) 6735123] Check out my awesome commit!
+     1 files changed, 1 insertions(+), 0 deletions(-)
+     create mode 100644 example
 
 > But I'm afraid of commitment!
 
@@ -422,59 +400,51 @@ Kind of.
 Git - viewing the log of changes
 ================================
 
-<% coderay :lang => :sh do %>
-> git log
-commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
-Author: Adrien Thebo <adrien@puppetlabs.com>
-Date:   Fri Feb 24 17:59:22 2012 -0800
+    > git log
+    commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
+    Author: Adrien Thebo <adrien@puppetlabs.com>
+    Date:   Fri Feb 24 17:59:22 2012 -0800
 
-    better grepping
-<% end %>
+        better grepping
 
 **OR**
 
-<% coderay :lang => :sh do %>
-> git log --oneline
-697f7f4 Fixed a bug in NoteLineCount... not seriously...    [permalink]
-ccf7859 better grepping
-44897dd FIX
-809722b It's getting late.
-2ed809e Reorganize images
-5e24310 pgsql is more strict, increase the hackiness up to 11
-<% end %>
+    > git log --oneline
+    697f7f4 Fixed a bug in NoteLineCount... not seriously...
+    ccf7859 better grepping
+    44897dd FIX
+    809722b It's getting late.
+    2ed809e Reorganize images
+    5e24310 pgsql is more strict, increase the hackiness up to 11
 
 Git - viewing what actually changed
 ===================================
 
-<% coderay :lang => :sh do %>
-> git whatchanged -1
-commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
-Author: Adrien Thebo <adrien@puppetlabs.com>
-Date:   Fri Feb 24 18:02:22 2012 -0800
+    > git whatchanged -1
+    commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
+    Author: Adrien Thebo <adrien@puppetlabs.com>
+    Date:   Fri Feb 24 18:02:22 2012 -0800
 
-    Check out my awesome commit!
+        Check out my awesome commit!
 
-:000000 100644 0000000... 0996042... A  example
-<% end %>
+    :000000 100644 0000000... 0996042... A  example
 
 **OR**
 
-<% coderay :lang => :sh do %>
-> git whatchanged -1 -p
-commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
-Author: Adrien Thebo <adrien@puppetlabs.com>
-Date:   Fri Feb 24 18:02:22 2012 -0800
+    > git whatchanged -1 -p
+    commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
+    Author: Adrien Thebo <adrien@puppetlabs.com>
+    Date:   Fri Feb 24 18:02:22 2012 -0800
 
-    Check out my awesome commit!
+        Check out my awesome commit!
 
-diff --git a/example b/example
-new file mode 100644
-index 0000000..0996042
---- /dev/null
-+++ b/example
-@@ -0,0 +1 @@
-+Fri Feb 24 18:00:29 PST 2012
-<% end %>
+    diff --git a/example b/example
+    new file mode 100644
+    index 0000000..0996042
+    --- /dev/null
+    +++ b/example
+    @@ -0,0 +1 @@
+    +Fri Feb 24 18:00:29 PST 2012
 
 !SLIDE
 
@@ -487,7 +457,6 @@ Branching and Merging
 Git - Branching and Merging, a visual representation
 ====================================================
 
-<% coderay :lang => :sh do %>
     * fd1685b Adrien Thebo 3 months ago snaaarky comments.
     * f461e29 Adrien Thebo 3 months ago Sketchy urls.
     * a3cca2d Adrien Thebo 3 months ago Added gpg.
@@ -505,23 +474,20 @@ Git - Branching and Merging, a visual representation
     * 8c02f3d Adrien Thebo 3 months ago Filled out command descriptions for shell survival guide
     * ffe5bb6 Adrien Thebo 3 months ago Renamed preamble to reasoning
     * 8851dae Adrien Thebo 3 months ago cleanup on redirection
-<% end %>
 
 Git - Looking at current branches
 =================================
 
-<% coderay :lang => :sh do %>
-> cd src/facter
-> git branch
-* 1.6.x
-  external_fact_support_full
-  master
-  proto/master/docstrings
-  ticket/1.6.x/12813-redirect_lspci_stderr
-  ticket/11660-sshfp_and_ssh_rspec
-  ticket/master/2157-external_fact_support
-  ticket/master/4561-add_structured_data
-<% end %>
+    > cd src/facter
+    > git branch
+    * 1.6.x
+      external_fact_support_full
+      master
+      proto/master/docstrings
+      ticket/1.6.x/12813-redirect_lspci_stderr
+      ticket/11660-sshfp_and_ssh_rspec
+      ticket/master/2157-external_fact_support
+      ticket/master/4561-add_structured_data
 
 I'm currently on the 1.6.x branch.
 
@@ -532,24 +498,20 @@ The ticket/* branches are *feature* branches
 Git - Making a new branch
 =========================
 
-<% coderay :lang => :sh do %>
-> git branch new_feature_branch
-<% end %>
+    > git branch new_feature_branch
 
 This creates the branch 'new_feature_branch'
 
-<% coderay :lang => :sh do %>
-> git branch
-* 1.6.x
-  external_fact_support_full
-  master
-  new_feature_branch  <------ We made a new branch!
-  proto/master/docstrings
-  ticket/1.6.x/12813-redirect_lspci_stderr
-  ticket/11660-sshfp_and_ssh_rspec
-  ticket/master/2157-external_fact_support
-  ticket/master/4561-add_structured_data
-<% end %>
+    > git branch
+    * 1.6.x
+      external_fact_support_full
+      master
+      new_feature_branch  <------ We made a new branch!
+      proto/master/docstrings
+      ticket/1.6.x/12813-redirect_lspci_stderr
+      ticket/11660-sshfp_and_ssh_rspec
+      ticket/master/2157-external_fact_support
+      ticket/master/4561-add_structured_data
 
 Note that we're still on the 1.6.x branch
 
@@ -558,26 +520,22 @@ Git - Making a new branch
 
 Alternately...
 
-<% coderay :lang => :sh do %>
-> git checkout -b another_feature_branch
-Switched to a new branch 'another_feature_branch'
-<% end %>
+    > git checkout -b another_feature_branch
+    Switched to a new branch 'another_feature_branch'
 
 This creates a new branch and switches to it.
 
-<% coderay :lang => :sh do %>
-> git branch
-  1.6.x
-* another_feature_branch  <---- Another new branch! Note the asterisk!
-  external_fact_support_full
-  master
-  new_feature_branch
-  proto/master/docstrings
-  ticket/1.6.x/12813-redirect_lspci_stderr
-  ticket/11660-sshfp_and_ssh_rspec
-  ticket/master/2157-external_fact_support
-  ticket/master/4561-add_structured_data
-<% end %>
+    > git branch
+      1.6.x
+    * another_feature_branch  <---- Another new branch! Note the asterisk!
+      external_fact_support_full
+      master
+      new_feature_branch
+      proto/master/docstrings
+      ticket/1.6.x/12813-redirect_lspci_stderr
+      ticket/11660-sshfp_and_ssh_rspec
+      ticket/master/2157-external_fact_support
+      ticket/master/4561-add_structured_data
 
 The asterisk indicates that this is our current branch.
 
@@ -594,22 +552,19 @@ Git - Merging a branch
 In this example, I'll merge the branch 'duplicity' into the main branch,
 'master'.
 
-<% coderay :lang => :sh do %>
-> git branch
-* duplicity
-  ganeti
-  master
-> git checkout master
-Switched to branch 'master'
-% git merge --no-ff duplicity
-Merge made by recursive.
- dist/duplicity/manifests/cron.pp |   70 ++++++++++++++++++++++++++++++++-----
- 1 files changed, 60 insertions(+), 10 deletions(-)
-<% end %>
+    > git branch
+    * duplicity
+      ganeti
+      master
+    > git checkout master
+    Switched to branch 'master'
+    % git merge --no-ff duplicity
+    Merge made by recursive.
+     dist/duplicity/manifests/cron.pp |   70 ++++++++++++++++++++++++++++++++-----
+     1 files changed, 60 insertions(+), 10 deletions(-)
 
 The resulting history looks like this:
 
-<% coderay :lang => :sh do %>
     *   413e4a7 Adrien Thebo 3 minutes ago Merge branch 'duplicity'
     |\
     | * d6b7efc Adrien Thebo 3 hours ago Force removal of stale backup files
@@ -618,7 +573,6 @@ The resulting history looks like this:
     | * affa757 Adrien Thebo 4 hours ago Add incremental, full backups + cleanups for duplicity
     |/
     * f83a636 Adrien Thebo 5 hours ago Tyop in duplicity for gpg agent info
-<% end %>
 
 Git - Why Would You Use Branches?
 =================================
@@ -646,27 +600,23 @@ Github - Copying a project locally
 
 ### Cloning a project readonly
 
-<% coderay :lang => :sh do %>
-> git clone git://github.com/adrienthebo/worstprogramever
-Cloning into worstprogramever...
-remote: Counting objects: 20, done.
-remote: Compressing objects: 100% (19/19), done.
-remote: Total 20 (delta 5), reused 9 (delta 1)
-Receiving objects: 100% (20/20), done.
-Resolving deltas: 100% (5/5), done.
-<% end %>
+    > git clone git://github.com/adrienthebo/worstprogramever
+    Cloning into worstprogramever...
+    remote: Counting objects: 20, done.
+    remote: Compressing objects: 100% (19/19), done.
+    remote: Total 20 (delta 5), reused 9 (delta 1)
+    Receiving objects: 100% (20/20), done.
+    Resolving deltas: 100% (5/5), done.
 
 ### Github - Cloning a project read/write
 
-<% coderay :lang => :sh do %>
-> git clone git@github.com:adrienthebo/worstprogramever
-Cloning into worstprogramever...
-remote: Counting objects: 20, done.
-remote: Compressing objects: 100% (19/19), done.
-remote: Total 20 (delta 5), reused 9 (delta 1)
-Receiving objects: 100% (20/20), done.
-Resolving deltas: 100% (5/5), done.
-<% end %>
+    > git clone git@github.com:adrienthebo/worstprogramever
+    Cloning into worstprogramever...
+    remote: Counting objects: 20, done.
+    remote: Compressing objects: 100% (19/19), done.
+    remote: Total 20 (delta 5), reused 9 (delta 1)
+    Receiving objects: 100% (20/20), done.
+    Resolving deltas: 100% (5/5), done.
 
 Note the difference between the URLs; the former uses the git protocol, the
 latter uses SSH.
@@ -676,33 +626,29 @@ Github - Making changes to a project
 
 ### Make your changes as normal...
 
-<% coderay :lang => :sh do %>
-> cd worstprogramever
-> ls
-Makefile	fail.c
-> mvim README.markdown
-> git add README.markdown
-> git st
-## master
-A  README.markdown
-> git ci
-[master 3534eef] Added a README!
- 1 files changed, 25 insertions(+), 0 deletions(-)
- create mode 100644 README.markdown
-<% end %>
+    > cd worstprogramever
+    > ls
+    Makefile	fail.c
+    > mvim README.markdown
+    > git add README.markdown
+    > git st
+    ## master
+    A  README.markdown
+    > git ci
+    [master 3534eef] Added a README!
+     1 files changed, 25 insertions(+), 0 deletions(-)
+     create mode 100644 README.markdown
 
 ### And then run `git push`
 
-<% coderay :lang => :sh do %>
-> git push
-Counting objects: 4, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 605 bytes, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To git@github.com:adrienthebo/worstprogramever
-   29e5bcd..3534eef  master -> master
-<% end %>
+    > git push
+    Counting objects: 4, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (3/3), done.
+    Writing objects: 100% (3/3), 605 bytes, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    To git@github.com:adrienthebo/worstprogramever
+       29e5bcd..3534eef  master -> master
 
 This uploads your branch to the remote server, so you can share it with people.
 
