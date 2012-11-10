@@ -1,0 +1,788 @@
+title: Version Control Systems
+author: Adrien Thebo
+duration: 120
+
+## Version Control Systems
+
+### Making dumb mistakes faster, without fear
+
+![Coffee](./images/drink_coffee.jpg)
+
+Adrien Thebo
+
+&copy; 2012 Adrien Thebo [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/us/)
+
+!SLIDE
+
+# Introduction
+
+## What is Version Control?
+
+  * A Version Control System, or VCS, is a tool used to track changes to files
+  * Allows you to manage code or documents as you work
+    * Make changes in incremental steps
+    * View changes
+    * Revert errors
+  * Greatly simplifies collaboration
+
+## Why Should You Care?
+
+  * Try out experimental ideas without destroying your code base
+  * Resolve mistakes by switching to the last working copy
+  * Find the change that introduced a bug
+  * Have VCS merge your changes with classmates instead of by hand
+  * Use VCS as a backup system!
+    * "Wait, you **didn't** want that file deleted?"
+
+## Why Should You Care?
+
+  * Any sane developer uses VCS
+    * Github
+    * Gitorious
+    * Mercurial
+    * code.google.com
+    * Sourceforge
+    * et cetera...
+  * Version control systems are the life blood of open source
+    * Reduces barrier to entry
+    * Easier to manage contributions
+
+## Why Should You Care?
+
+  * Managing data and code is hard
+  * Collaborating with other people is even harder
+  * Version control tools are designed to make this as seamless as possible.
+
+!SLIDE
+
+# Background
+
+## Before VCS
+
+Living dangerously!
+
+    nano really_complex_algorithm.c
+
+*three hours later:*
+
+    rm -rf *
+
+Whoops.
+
+## Do It Yourself VCS
+
+Early implementations of version control was done by copying files
+
+    nano really_complex_algorithm.c
+    cp really_complex_algorithm.c really_complex_algorithm.c.1
+    nano really_complex_algorithm.c
+    cp really_complex_algorithm.c really_complex_algorithm.c.2
+    nano really_complex_algorithm.c
+    cp really_complex_algorithm.c really_complex_algorithm.c.3
+
+This wouldn't get tedious at all!
+
+## The beginning of VCS
+
+  * Initial idea of VCS came from engineering
+  * Engineers would create blueprints, and save earlier revisions
+  * If a version was not liked, it was trivial to roll back
+  * Revision control was also applied in business, law
+  * Any place where you may need to backtrack on a document, VCS will show up
+
+## Requirements for VCS
+
+  * Any VCS has to deal with some basic concerns
+    * Merging changes
+    * Locking files
+    * Atomic commits
+  * Each VCS handles these concerns differently
+
+!SLIDE
+
+# A Tour of Version Control Systems
+
+## Source Code Control System (SCCS)
+
+  * Arguably the first VCS system available
+  * Developed by Bell Labs in 1972
+    * For some comparison, C was written in 1972 at Bell Labs as well
+  * SCCS was the dominant VCS until the advent of RCS
+  * Generally considered obsolete, and only mentioned for historical purposes
+  * Except for the storage method - still used today
+
+[Wikipedia: Source Code Control System](http://en.wikipedia.org/wiki/Source_Code_Control_System)
+
+## Revision Control System (RCS)
+
+  * Revision Control System (RCS)
+    * Released in 1982
+    * Created as an evolution of SCCS
+    * Stored changes of files as a series of diffs
+    * Very popular, still used today
+
+[Wikipedia: Revision Control System](http://en.wikipedia.org/wiki/Revision_Control_System)
+
+## Pros and Cons of RCS
+
+  * Advantages
+    * Dirt simple
+    * Only need to know a few commands
+    * Changesets stored as a series of diffs, so easy to view
+    * File locking and branching supported
+  * Disadvantages
+    * Single files only
+    * Cannot store entire projects
+    * No security mechanisms - anyone can tamper with diffs
+    * Branching sucks - everybody just locks the file
+
+## RCS in action
+
+    co -l agenda.txt <-- check out and lock a file
+    nano agenda.txt
+    ci -u agenda.txt <-- check in and unlock a file
+
+!SLIDE
+
+# Centralized VCS
+
+## Modern VCS
+
+  * While early VCS systems were important, they were still lacking
+  * No real support for multiple users
+  * No support for project-wide version control
+  * Make changes in foo.c and bar.c, and changes in one break the other
+  * No way to look at both of the changes without black magic and/or shell scripts
+  * Technologies started coming out to deal with this
+
+## Concurrent Version System (CVS)
+
+  * Behold! Another evolution!
+  * CVS was the first client-server VCS
+  * Built upon RCS
+  * Tracks a set of files, or a project
+  * Instead of just hacking on one file in a specific location, you check out a project
+  * Support for multiple users simultaneously working on one project
+
+## Applications of CVS Today
+
+  * While CVS is largely obsolete, a few projects still use it today
+  * Examples:
+    * Gentoo - portage
+    * FreeBSD - ports
+    * Various open source projects
+
+## Pros and Cons of CVS
+
+  * Advantages
+    * ...
+    * ...
+    * CVS was used because it was the first, not because it was good.
+  * Disadvantages
+    * No moving/renaming of directories
+    * No versioning of symbolic links
+    * No unicode
+    * No atomic commits
+      * If a commit fails halfway through, the project might be inconsistent
+      * It'll commit enough changes to break everything!
+    * Et cetera
+
+!SLIDE
+
+# SVN
+
+## Apache Subversion (SVN)
+
+  * Since CVS sucked so much, people wanted an alternative
+  * SVN was designed as CVS without the problems
+  * Widely adopted by the open source community
+  * Support for a wide number of features
+
+## Features of SVN
+
+  * Support for Properties
+    * On the fly keywording in the source - note the last changed date in a comment
+    * Store mime-types
+    * Store executable bit (*nix)
+  * Sane branching
+  * Support for authentication/authorization
+  * Atomic commits
+  * Sane file locking
+
+## SVN Terms
+
+  * **trunk**
+  * **branches**
+  * **tags**
+
+TODO
+
+## Example SVN Structure
+
+![svn](./images/svn/Subversion_project_visualization.png)
+
+## Pros and Cons of SVN
+
+  * Advantages
+    * The most widely used VCS today
+    * Robust and battle-tested
+    * Fully centralized - collaboration is very easy
+    * Support for branching and tagging
+  * Disadvantages
+    * Fully centralized - no offline work
+    * Slow - network latency can increase time to work
+      * Branches are heavyweight
+        * Branching and tagging means making a full copy of all files
+      * Directly correlated, merging is a massive operation
+    * Based on CVS
+
+!SLIDE
+
+# Decentralized VCS
+
+## Decentralized VCS
+
+  * Centralized VCS has many limitations
+    * No offline work
+    * Forking a project is not trivial
+    * Centralized model is not always the best for a project
+  * People started experimenting with a decentralized model
+
+## DVCS compared to CVCS
+
+### Differences
+
+  * All working copies are branches (no trunk)
+  * Most actions operate on a local copy of the project
+  * A central repository can exist, but is not required
+
+### Advantages
+
+  * Easy to fork and merge code
+  * Network connectivity is not required to use DVCS
+  * Resistant to failure
+
+### Disadvantages
+
+  * Initial clone is costly, as it copies the entire repo
+  * Added complexity
+    * Ordering commits becomes much less straightforward
+
+## Popular DVCS Tools
+
+  1. Git
+  2. Mercurial
+  3. Arch
+  4. Darcs
+  5. Bazaar
+
+  * Git and Mercurial are the heavyweights of the field
+  * Others are used but on a smaller scale
+
+!SLIDE
+
+# Git
+
+## Introduction to Git
+
+
+> I'm an egotistical bastard, and I name all my projects after myself. First Linux, now git.
+>
+> *Linus Torvalds*
+
+  * Git is the most popular of all the DVCS tools
+  * Open source DVCS created by Linux Torvalds, creator of the Linux kernel
+  * Created to fill the gap left by a previous proprietary DVCS
+  * The result of letting kernel hackers write a DVCS
+
+## The inspiration for Git
+
+  * Git is a remarkable tool that had to fulfill a difficult set of obligations
+  * Track the entire kernel history, with incredible amounts of information
+  * Needed to be small, fast, and powerful
+
+> Take CVS as an example of what not to do; if in doubt, make the exact opposite decision.
+
+## Characteristics of Git
+
+  * Designed for nonlinear development (Think kernel development)
+  * Built for distributed and offline work
+  * Built for speed and ability to handle large projects
+  * Cryptographic authentication/verification
+
+!SLIDE
+
+# Single Player Git
+
+## Git - Creating a Project
+
+    adrien@dre:~$ git init
+    Initialized empty Git repository in /private/vcs_presentation/.git/
+
+This creates a new project in the current directory.
+
+    adrien@dre:~$ ls -la
+    total 264
+    drwx------  13 adrien  admin    442 Feb 24 17:52 ./
+    drwx------   9 adrien  admin    306 Feb 23 22:41 ../
+    drwx------  15 adrien  admin    510 Feb 24 17:52 .git/ <--- git init creates this directory
+    -rw-------   1 adrien  admin    249 Feb 24 17:45 Makefile
+    drwx------   5 adrien  admin    170 Feb 24 17:45 images/
+    -rw-------   1 adrien  admin  14330 Feb 24 17:52 vcs_presentation.text
+
+## Git - adding a file
+
+    git add lib/vunderbeam.rb
+
+  * This takes a snapshot of the vunderbeam file and adds it to the **index**
+
+## Git - seeing the project status
+
+    % git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #	new file:   lib/vunderbeam.rb
+
+## Git - seeing what content changed
+
+    adrien@dre:~$ git diff lib/vunderbeam
+    diff --git a/lib/vunderbeam.rb b/lib/vunderbeam.rb
+    index 7042555..48ce445 100644
+    --- a/lib/vunderbeam.rb
+    +++ b/lib/vunderbeam.rb
+    @@ -2,8 +2,8 @@ class Vunderbeam
+
+       def initialize(opts = {:ios => $stdout, :sep => " | "})
+         @widgets = []
+    -    @ios     = opts[:ios]
+    -    @sep     = opts[:sep]
+    +    @ios     = opts[:ios] || $stdout
+    +    @sep     = opts[:sep] || " | "
+       end
+
+## Git - making your changes permanent
+
+    adrien@dre:~$ git commit -m 'Check out my awesome commit!'
+    [master (root-commit) 6735123] Check out my awesome commit!
+     1 files changed, 1 insertions(+), 0 deletions(-)
+     create mode 100644 example
+
+  * With git, commit early and commit often
+  * It's easier to make lots of small commits and tidy up later rather than
+    split up big hunks of work
+
+## Git - viewing the log of changes
+
+    adrien@dre:~$ git log
+    commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
+    Author: Adrien Thebo <adrien@somethingsinistral.com>
+    Date:   Fri Feb 24 17:59:22 2012 -0800
+
+        better grepping
+
+**OR**
+
+    adrien@dre:~$ git log --oneline
+    a2667bf Don't log output for moving /etc/hosts
+    ac0349b Initial implementation of hosts provisioner
+    4f7a6d6 Update networking schema
+    329deab Fix bug with vagrant config stomping
+    cab6cde Initial implementation of networking
+    7bc833a Align data
+    a45d4ec Move all provisioning steps out of vagrantfile
+
+## Git - viewing what actually changed
+
+    adrien@dre:~$ git whatchanged -1
+    commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
+    Author: Adrien Thebo <adrien@somethingsinistral.com>
+    Date:   Fri Feb 24 18:02:22 2012 -0800
+
+        Check out my awesome commit!
+
+    :000000 100644 0000000... 0996042... A  example
+
+**OR**
+
+    commit e7800016874335ea110449f27c8c4548ec8ec267
+    Author: Adrien Thebo <adrien@somethingsinistral.com>
+    Date:   Fri Nov 9 21:46:10 2012 -0800
+
+        Add default values for vunderbeam
+
+    diff --git a/lib/vunderbeam.rb b/lib/vunderbeam.rb
+    index 7042555..48ce445 100644
+    --- a/lib/vunderbeam.rb
+    +++ b/lib/vunderbeam.rb
+    @@ -2,8 +2,8 @@ class Vunderbeam
+
+       def initialize(opts = {:ios => $stdout, :sep => " | "})
+         @widgets = []
+    -    @ios     = opts[:ios]
+    -    @sep     = opts[:sep]
+    +    @ios     = opts[:ios] || $stdout
+    +    @sep     = opts[:sep] || " | "
+       end
+
+!SLIDE
+
+# Branching and Merging with Git
+
+## Git - Branching and Merging, a visual representation
+
+    * fd1685b Adrien Thebo 3 months ago snaaarky comments.
+    * f461e29 Adrien Thebo 3 months ago Sketchy urls.
+    * a3cca2d Adrien Thebo 3 months ago Added gpg.
+    * c0cfcdd Adrien Thebo 3 months ago PLURALIZATION!
+    *   edf37aa Adrien Thebo 3 months ago Merge branch 'css_work'
+    |\
+    | * fda5612 Adrien Thebo 3 months ago Block quoting quotes
+    | * 8d7ca85 Adrien Thebo 3 months ago Try to fix CSS
+    | * 27e6cf2 Adrien Thebo 3 months ago Usage of backticks instead of single quotes
+    | * c52996f Adrien Thebo 3 months ago Brief introductions to the sections on the index
+    * | 48d3834 Adrien Thebo 3 months ago Definitions or something like that.
+    |/
+    * ffe5bb6 Adrien Thebo 3 months ago Renamed preamble to reasoning
+    * 8851dae Adrien Thebo 3 months ago cleanup on redirection
+
+## Git - Looking at current branches
+
+    adrien@dre:~$ cd src/facter
+    adrien@dre:~$ git branch
+    * 1.6.x
+      external_fact_support_full
+      master
+      proto/master/docstrings
+      ticket/1.6.x/12813-redirect_lspci_stderr
+      ticket/11660-sshfp_and_ssh_rspec
+      ticket/master/2157-external_fact_support
+      ticket/master/4561-add_structured_data
+
+  * I'm currently on the 1.6.x branch.
+  * The 'master' branch is the default branch.
+  * The ticket/(thing) branches are *feature* branches
+
+## Git - Making a new branch
+
+    adrien@dre:~$ git branch new_feature_branch
+
+This creates the branch 'new_feature_branch'
+
+    adrien@dre:~$ git branch
+    * 1.6.x
+      external_fact_support_full
+      master
+      new_feature_branch  <------ We made a new branch!
+      proto/master/docstrings
+      ticket/1.6.x/12813-redirect_lspci_stderr
+      ticket/11660-sshfp_and_ssh_rspec
+      ticket/master/2157-external_fact_support
+      ticket/master/4561-add_structured_data
+
+Note that we're still on the 1.6.x branch
+
+## Git - Making a new branch
+
+Alternately...
+
+    adrien@dre:~$ git checkout -b another_feature_branch
+    Switched to a new branch 'another_feature_branch'
+
+This creates a new branch and switches to it.
+
+    adrien@dre:~$ git branch
+      1.6.x
+    * another_feature_branch  <---- Another new branch! Note the asterisk!
+      external_fact_support_full
+      master
+      new_feature_branch
+      proto/master/docstrings
+      ticket/1.6.x/12813-redirect_lspci_stderr
+      ticket/11660-sshfp_and_ssh_rspec
+      ticket/master/2157-external_fact_support
+      ticket/master/4561-add_structured_data
+
+The asterisk indicates that this is our current branch.
+
+## Git - Working in a branch
+
+  * When working in a branch, you would work as you would normally
+  * This time, you have two different versions of history
+  * Keep different tasks isolated
+
+## Git - Merging a branch
+
+In this example, I'll merge the branch 'duplicity' into the main branch,
+'master'.
+
+    adrien@dre:~$ git branch
+    * duplicity
+      ganeti
+      master
+    adrien@dre:~$ git checkout master
+    Switched to branch 'master'
+    % git merge duplicity
+    Merge made by recursive.
+     dist/duplicity/manifests/cron.pp |   70 ++++++++++++++++++++++++++++++++-----
+     1 files changed, 60 insertions(+), 10 deletions(-)
+
+The resulting history looks like this:
+
+    *   413e4a7 Adrien Thebo 3 minutes ago Merge branch 'duplicity'
+    |\
+    | * d6b7efc Adrien Thebo 3 hours ago Force removal of stale backup files
+    | * 39d6423 Adrien Thebo 4 hours ago Echo date to duplicity last run file instead of touching
+    | * 14f7e30 Adrien Thebo 4 hours ago Remove unneeded inline_template from duplicity::cron
+    | * affa757 Adrien Thebo 4 hours ago Add incremental, full backups + cleanups for duplicity
+    |/
+    * f83a636 Adrien Thebo 5 hours ago Typo in duplicity for gpg agent info
+
+## Git - Why Would You Use Branches?
+
+  * Branches are incredibly powerful
+  * They allow you to isolate different tasks
+  * Do normal development on master
+  * Try experimental ideas in a branch
+
+Many projects require features be implemented in a branch
+
+  * Makes integrating features easier
+  * Work on big features without interfering with normal operations
+
+!SLIDE
+
+
+# Multiplayer Git with Github
+
+## Github - Copying a project as read-only
+
+  * When cloning a project as readonly, use `git://`
+  * EG: **git://**github.com/adrienthebo/worstprogramever
+
+<pre>
+    adrien@dre:~$ git clone git://github.com/adrienthebo/worstprogramever
+    Cloning into worstprogramever...
+    remote: Counting objects: 20, done.
+    remote: Compressing objects: 100% (19/19), done.
+    remote: Total 20 (delta 5), reused 9 (delta 1)
+    Receiving objects: 100% (20/20), done.
+    Resolving deltas: 100% (5/5), done.
+</pre>
+
+## Github - Copying a project as read-write
+
+  * When cloning a project as read-write, use `git@`
+  * EG: **git@**github.com/adrienthebo/worstprogramever
+
+<pre>
+    adrien@dre:~$ git clone git@github.com:adrienthebo/worstprogramever
+    Cloning into worstprogramever...
+    remote: Counting objects: 20, done.
+    remote: Compressing objects: 100% (19/19), done.
+    remote: Total 20 (delta 5), reused 9 (delta 1)
+    Receiving objects: 100% (20/20), done.
+    Resolving deltas: 100% (5/5), done.
+</pre>
+
+## Github - Making changes to a project
+
+### Make your changes as normal...
+
+    adrien@dre:~$ nano README.markdown
+    adrien@dre:~$ git add README.markdown
+    adrien@dre:~$ git status
+    ## master
+    A  README.markdown
+    adrien@dre:~$ git ci
+    [master 3534eef] Added a README!
+     1 files changed, 25 insertions(+), 0 deletions(-)
+     create mode 100644 README.markdown
+
+### And then run `git push`
+
+    adrien@dre:~$ git push
+    Counting objects: 4, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (3/3), done.
+    Writing objects: 100% (3/3), 605 bytes, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    To git@github.com:adrienthebo/worstprogramever
+       29e5bcd..3534eef  master -> master
+
+This uploads your branch to the remote server, so you can share it with people.
+
+!SLIDE
+
+# Git internals
+
+## Git internals
+
+No one part of git is especially complicated.
+
+Too bad there are so many parts...
+
+**WARNING**
+
+This stuff is complex, and isn't necessary to get up and running. Don't worry
+if it isn't immediately clear.
+
+## Implementation
+
+  * Initially written as a "content addressable filesystem"
+  * Simply put, you put stuff in it, and you get a key to retrieve data
+  * You fetch that key, you get that data
+  * Eventually a full set of utilities were written to interact with git
+  * Has types of blob, tree, commit, and tag
+  * Objects are identified by a SHA-1 hash
+
+## Why hash everything?
+
+  * Using hashes to identify parts of git repository may seem bizarre, but it adds a lot to git
+  * Hashes ensure that nobody can tamper with any part of the repository without changing hashes
+  * Allows for extremely fast retrieval of files
+    * Instead of searching a series of files for some content, you look for a specific filename
+    * Instead of slowing down git, using hashes speeds it up
+
+!SLIDE
+
+# The building blocks of Git
+
+## Blob
+
+  * A "blob" is used to store file data - it is generally a file
+  * Only contains the contents of a file
+  * No attributes like the file name are stored
+
+![Blob](./images/git/object-blob.png)
+
+## Tree
+
+  * A "tree" is basically like a directory
+  * It references a bunch of other trees and/or blobs (i.e. files and sub-directories)
+  * Trees store the metadata for the objects they point to, e.g. name, permissions, and content type
+
+ ![Tree](./images/git/object-tree.png)
+
+## Commit
+
+  * A "commit" points to a single tree, marking it as what the project looked like at a certain point in time.
+  * Has the following components:
+    * tree: The hash of a tree object that shows that the project looks like at the time of the commit
+    * parent: the hash of the preceding commit, or commits
+    * author: the person who actually created the content
+    * committer: the person who made the actual commit
+    * comment: a description of the commit
+
+![Commit](./images/git/object-commit.png)
+
+## Tag
+
+  * A tag is used to "annotate" a particular object
+  * Commonly used to designate a specific commit, for things such as releases
+
+![Tag](./images/git/object-tag.png)
+
+## Putting it all together
+
+![Objects](./images/git/objects-example.png)
+
+!SLIDE
+
+# Git concepts
+
+## The working directory
+
+  * The the directory containing your files in git is called the "working directory"
+  * Any changes made to these are applied to the current branch
+  * Nothing is absolute until you perform a git operation on it
+  * Effectively a scratch space
+
+## References
+
+  * References are a way to track objects that are noteworthy
+  * Simply a file containing a SHA1 hash
+  * Lightweight tags are basically a reference and a tag object
+
+## The index
+
+  * The index, or staging area, is where you accumulate changes before a commit
+  * This allows you to very carefully assemble commits
+  * This is in contrast to SVN, where performing a commit adds all changes
+
+!SLIDE
+
+# Git workflow and commands
+
+## Git workflow
+
+![Workflow](./images/git/git-workflow.png)
+
+## Changing files with git
+
+  * `git init` - Creates a git repository in the current working disrectory
+  * `git add` - Adds the specified file to the index
+  * `git rm` - Removes the file from the file system and adds the removal to the index
+    * This is important, because git will not automatically remove files that you delete.
+  * `git mv` - Renames the file - equivalent to `mv file1 file2; git rm file1; git add file2`
+    * Remember that git doesn't track file names in a blob, so moves are tricky
+
+## Viewing git information
+
+  * `git status` - Shows the status of the changed files
+  * `git diff` - Shows the difference between two files, or the changes made to a file
+  * `git log` - Shows the commit logs
+  * `git blame` - Shows the author of every line in the file
+  * `git bisect` - Search the git history for a specific commit
+
+## Branching and merging
+
+  * `git branch` - Create, show and delete branches
+  * `git checkout` - Create and switch branches
+  * `git merge` - Merge the changes from one branch into the current branch
+
+## Making changes to the history
+
+  * `git reset` - Restores the working copy to the most recent committed version
+  * `git checkout` - Restores a single file in the working copy to the most recent committed version
+  * `git commit` - Commits all the files in **index** into the repository
+  * `git revert` - Undoes the most recent commit by adding a new commit, with all the changes reverted
+  * `git cherry-pick` - Applies a single commit to your current branch
+  * `git rebase` - Rewrite history
+
+## Collaboration
+
+  * `git clone` - Fetches a remote git repository and checks it out
+  * `git fetch` - Fetches objects and reference from a remote repository
+  * `git pull` - Fetches and merges objects and references from a remote repository
+  * `git push` - Sends refs and remotes to a remote repository
+
+!SLIDE
+
+# Advanced Git
+
+## Git hooks
+
+  * Git allows you to customize behavior with hooks
+    * Ensure that the code works before merging it
+    * Deploy code elsewhere after a commit
+    * Other actions that need to happen automatically
+
+## The really gory details
+
+This slide will be completed someday.
+
+HAHAHAHA no.
+
+## References
+
+  * [The Git Community Book](http://book.git-scm.com/)
+  * [Pro Git](http://progit.org/book)
+  * [Git for Designers](http://hoth.entp.com/output/git_for_designers.html)
+
+## Find this Presentation
+
+  * [Github](http://github.com/adrienthebo/vcs_presentation)
+  * [Hosted Presentation](http://somethingsinistral.net/presentations/vcs/presentation.html)
+  * [Single File Presentation](http://somethingsinistral.net/presentations/vcs/presentation.pdf.html)
