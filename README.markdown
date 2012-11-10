@@ -9,7 +9,5 @@ Building
 Required gems:
 
   * slideshow
-  * something that can render markdown to html
-    * kramdown
-    * maruku
-  * coderay
+    * slideshow template deck.js is recommended (`slideshow -f deck.js`)
+  * kramdown
