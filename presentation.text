@@ -275,8 +275,8 @@ Decentralized VCS
     * Centralized model is not always the best for a project
   * People started experimenting with a decentralized model
 
-Differences between CVCS and DVCS
-=================================
+DVCS compared to CVCS
+=====================
 
   * Differences
     * All working copies are branches
