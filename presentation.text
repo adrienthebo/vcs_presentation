@@ -377,7 +377,7 @@ This creates a new project in the current directory.
 
     adrien@dre:~$ git log
     commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
-    Author: Adrien Thebo <adrien@puppetlabs.com>
+    Author: Adrien Thebo <adrien@somethingsinistral.com>
     Date:   Fri Feb 24 17:59:22 2012 -0800
 
         better grepping
@@ -397,7 +397,7 @@ This creates a new project in the current directory.
 
     adrien@dre:~$ git whatchanged -1
     commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
-    Author: Adrien Thebo <adrien@puppetlabs.com>
+    Author: Adrien Thebo <adrien@somethingsinistral.com>
     Date:   Fri Feb 24 18:02:22 2012 -0800
 
         Check out my awesome commit!
@@ -407,7 +407,7 @@ This creates a new project in the current directory.
 **OR**
 
     commit e7800016874335ea110449f27c8c4548ec8ec267
-    Author: Adrien Thebo <adrien@puppetlabs.com>
+    Author: Adrien Thebo <adrien@somethingsinistral.com>
     Date:   Fri Nov 9 21:46:10 2012 -0800
 
         Add default values for vunderbeam
