@@ -49,12 +49,9 @@ Adrien Thebo
 
 ## Why Should You Care?
 
-In general, if you are writing more than a few lines of code and not using
-version control...
-
-**YOU ARE DOING IT WRONG.**
-
-**PERIOD.**
+  * Managing data and code is hard
+  * Collaborating with other people is even harder
+  * Version control tools are designed to make this as seamless as possible.
 
 !SLIDE
 
@@ -620,6 +617,8 @@ This uploads your branch to the remote server, so you can share it with people.
 
 # Git internals
 
+## Git internals
+
 No one part of git is especially complicated.
 
 Too bad there are so many parts...
@@ -782,10 +781,8 @@ HAHAHAHA no.
   * [Pro Git](http://progit.org/book)
   * [Git for Designers](http://hoth.entp.com/output/git_for_designers.html)
 
-Find this Presentation
-======================
+## Find this Presentation
 
   * [Github](http://github.com/adrienthebo/vcs_presentation)
   * [Hosted Presentation](http://somethingsinistral.net/presentations/vcs/presentation.html)
   * [Single File Presentation](http://somethingsinistral.net/presentations/vcs/presentation.pdf.html)
-
