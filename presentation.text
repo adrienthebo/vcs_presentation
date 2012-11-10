@@ -218,24 +218,11 @@ This wouldn't get tedious at all!
   * **branches**
   * **tags**
 
+TODO
+
 ## Example SVN Structure
 
 ![svn](./images/svn/Subversion_project_visualization.png)
-
-  1. Initial commit to trunk
-  2. Code branched from trunk
-  3. Change made to branch
-  4. Branch merged to trunk
-  5. Trunk copied into a tag
-  6. Code branched from trunk into branch A
-  7. Code branched from tag into branch B
-  8. Change made to branch B
-  9. Change made to branch A
-  10. Branch B merged into trunk
-  11. Trunk merged back into branch A
-  12. Branch A merged into trunk
-  13. Trunk copied into a tag
-  14. Change made to trunk
 
 ## Pros and Cons of SVN
 
@@ -247,17 +234,16 @@ This wouldn't get tedious at all!
   * Disadvantages
     * Fully centralized - no offline work
     * Slow - network latency can increase time to work
-      * Branches are expensive - make a full copy of the entire repository
+      * Branches are heavyweight
+        * Branching and tagging means making a full copy of all files
       * Directly correlated, merging is a massive operation
     * Based on CVS
 
 !SLIDE
 
-Decentralized VCS
------------------
+# Decentralized VCS
 
-Decentralized VCS
-=================
+## Decentralized VCS
 
   * Centralized VCS has many limitations
     * No offline work
@@ -265,59 +251,62 @@ Decentralized VCS
     * Centralized model is not always the best for a project
   * People started experimenting with a decentralized model
 
-DVCS compared to CVCS
-=====================
+## DVCS compared to CVCS
 
-  * Differences
-    * All working copies are branches
-    * Most actions are local
-    * Central repository can exist, but is not required
-  * Advantages
-    * Easy to fork and merge code
-    * Network connectivity is not required to use DVCS
-    * Resistant to failure
-  * Disadvantages
-    * Initial clone is costly, as it copies the entire repo
-    * Added complexity
-      * Ordering commits becomes much less straightforward
+### Differences
 
-List of DVCS Tools
-==================
+  * All working copies are branches (no trunk)
+  * Most actions operate on a local copy of the project
+  * A central repository can exist, but is not required
 
-  * Arch
-  * Monotone
-  * Darcs
-  * Bazaar
-  * Mercurial
-  * **Git** (We like git)
+### Advantages
+
+  * Easy to fork and merge code
+  * Network connectivity is not required to use DVCS
+  * Resistant to failure
+
+### Disadvantages
+
+  * Initial clone is costly, as it copies the entire repo
+  * Added complexity
+    * Ordering commits becomes much less straightforward
+
+## Popular DVCS Tools
+
+  1. Git
+  2. Mercurial
+  3. Arch
+  4. Darcs
+  5. Bazaar
+
+  * Git and Mercurial are the heavyweights of the field
+  * Others are used but on a smaller scale
 
 !SLIDE
 
-Git
----
+# Git
 
-Introduction to Git
-===================
+## Introduction to Git
 
-> "I'm an egotistical bastard, and I name all my projects after myself. First Linux, now git."
 
-*Linus Torvalds*
+> I'm an egotistical bastard, and I name all my projects after myself. First Linux, now git.
+>
+> *Linus Torvalds*
 
-  * Git is the heavyweight of the DVCS world
+  * Git is the most popular of all the DVCS tools
   * Open source DVCS created by Linux Torvalds, creator of the Linux kernel
   * Created to fill the gap left by a previous proprietary DVCS
   * The result of letting kernel hackers write a DVCS
 
-The inspiration for Git
-=======================
+## The inspiration for Git
 
   * Git is a remarkable tool that had to fulfill a difficult set of obligations
   * Track the entire kernel history, with incredible amounts of information
   * Needed to be small, fast, and powerful
-  * Designed to be the complete opposite of CVS
 
-Characteristics of Git
-======================
+> Take CVS as an example of what not to do; if in doubt, make the exact opposite decision.
+
+## Characteristics of Git
 
   * Designed for nonlinear development (Think kernel development)
   * Built for distributed and offline work
@@ -326,81 +315,70 @@ Characteristics of Git
 
 !SLIDE
 
-Git as Magick, Part I
----------------------
+# Single Player Git
 
-Single Player Git
------------------
+## Git - Creating a Project
 
-Git - Creating a Project
-========================
-
-    > git init
+    adrien@dre:~$ git init
     Initialized empty Git repository in /private/vcs_presentation/.git/
 
 This creates a new project in the current directory.
 
-    > ls -la
+    adrien@dre:~$ ls -la
     total 264
     drwx------  13 adrien  admin    442 Feb 24 17:52 ./
     drwx------   9 adrien  admin    306 Feb 23 22:41 ../
-    drwx------  15 adrien  admin    510 Feb 24 17:52 .git/ <--- git init creates this file
+    drwx------  15 adrien  admin    510 Feb 24 17:52 .git/ <--- git init creates this directory
     -rw-------   1 adrien  admin    249 Feb 24 17:45 Makefile
     drwx------   5 adrien  admin    170 Feb 24 17:45 images/
     -rw-------   1 adrien  admin  14330 Feb 24 17:52 vcs_presentation.text
 
-Git - adding a file
-===================
+## Git - adding a file
 
-    git add example
+    git add lib/vunderbeam.rb
 
-Git - seeing the project status
-===============================
+  * This takes a snapshot of the vunderbeam file and adds it to the **index**
+
+## Git - seeing the project status
 
     % git status
     # On branch master
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
     #
-    #	new file:   src/foocity/tile/TileCollection.java
-    #
-    # Untracked files:
-    #   (use "git add <file>..." to include in what will be committed)
-    #
-    #	src/foocity/grid/GridLoader.java
+    #	new file:   lib/vunderbeam.rb
 
-Git - seeing what content changed
-=================================
+## Git - seeing what content changed
 
-    > git diff example
-    diff --git c/example i/example
-    new file mode 100644
-    index 0000000..0996042
-    --- /dev/null
-    +++ i/example
-    @@ -0,0 +1 @@
-    +Fri Feb 24 18:00:29 PST 2012
+    adrien@dre:~$ git diff lib/vunderbeam
+    diff --git a/lib/vunderbeam.rb b/lib/vunderbeam.rb
+    index 7042555..48ce445 100644
+    --- a/lib/vunderbeam.rb
+    +++ b/lib/vunderbeam.rb
+    @@ -2,8 +2,8 @@ class Vunderbeam
 
-Git - making your changes permanent
-===================================
+       def initialize(opts = {:ios => $stdout, :sep => " | "})
+         @widgets = []
+    -    @ios     = opts[:ios]
+    -    @sep     = opts[:sep]
+    +    @ios     = opts[:ios] || $stdout
+    +    @sep     = opts[:sep] || " | "
+       end
 
-    > git commit -m 'Check out my awesome commit!'
+## Git - making your changes permanent
+
+    adrien@dre:~$ git commit -m 'Check out my awesome commit!'
     [master (root-commit) 6735123] Check out my awesome commit!
      1 files changed, 1 insertions(+), 0 deletions(-)
      create mode 100644 example
 
-> But I'm afraid of commitment!
+  * With git, commit early and commit often
+  * It's easier to make lots of small commits and tidy up later rather than
+    split up big hunks of work
 
-**GET OVER IT.**
+## Git - viewing the log of changes
 
-With git, commit early, commit often. You can fix it after the fact.
-
-Kind of.
-
-Git - viewing the log of changes
-================================
-
-    > git log
+    adrien@dre:~$ git log
     commit ccf7859df622b4f0f9e98bd38621f287f8a8218b
     Author: Adrien Thebo <adrien@puppetlabs.com>
     Date:   Fri Feb 24 17:59:22 2012 -0800
@@ -409,18 +387,18 @@ Git - viewing the log of changes
 
 **OR**
 
-    > git log --oneline
-    697f7f4 Fixed a bug in NoteLineCount... not seriously...
-    ccf7859 better grepping
-    44897dd FIX
-    809722b It's getting late.
-    2ed809e Reorganize images
-    5e24310 pgsql is more strict, increase the hackiness up to 11
+    adrien@dre:~$ git log --oneline
+    a2667bf Don't log output for moving /etc/hosts
+    ac0349b Initial implementation of hosts provisioner
+    4f7a6d6 Update networking schema
+    329deab Fix bug with vagrant config stomping
+    cab6cde Initial implementation of networking
+    7bc833a Align data
+    a45d4ec Move all provisioning steps out of vagrantfile
 
-Git - viewing what actually changed
-===================================
+## Git - viewing what actually changed
 
-    > git whatchanged -1
+    adrien@dre:~$ git whatchanged -1
     commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
     Author: Adrien Thebo <adrien@puppetlabs.com>
     Date:   Fri Feb 24 18:02:22 2012 -0800
@@ -431,55 +409,51 @@ Git - viewing what actually changed
 
 **OR**
 
-    > git whatchanged -1 -p
-    commit 67351233d0cad08ebbd4586da6a952d78a26ed5d
+    commit e7800016874335ea110449f27c8c4548ec8ec267
     Author: Adrien Thebo <adrien@puppetlabs.com>
-    Date:   Fri Feb 24 18:02:22 2012 -0800
+    Date:   Fri Nov 9 21:46:10 2012 -0800
 
-        Check out my awesome commit!
+        Add default values for vunderbeam
 
-    diff --git a/example b/example
-    new file mode 100644
-    index 0000000..0996042
-    --- /dev/null
-    +++ b/example
-    @@ -0,0 +1 @@
-    +Fri Feb 24 18:00:29 PST 2012
+    diff --git a/lib/vunderbeam.rb b/lib/vunderbeam.rb
+    index 7042555..48ce445 100644
+    --- a/lib/vunderbeam.rb
+    +++ b/lib/vunderbeam.rb
+    @@ -2,8 +2,8 @@ class Vunderbeam
+
+       def initialize(opts = {:ios => $stdout, :sep => " | "})
+         @widgets = []
+    -    @ios     = opts[:ios]
+    -    @sep     = opts[:sep]
+    +    @ios     = opts[:ios] || $stdout
+    +    @sep     = opts[:sep] || " | "
+       end
 
 !SLIDE
 
-Git as Magick, Part II
-----------------------
+# Branching and Merging with Git
 
-Branching and Merging
----------------------
-
-Git - Branching and Merging, a visual representation
-====================================================
+## Git - Branching and Merging, a visual representation
 
     * fd1685b Adrien Thebo 3 months ago snaaarky comments.
     * f461e29 Adrien Thebo 3 months ago Sketchy urls.
     * a3cca2d Adrien Thebo 3 months ago Added gpg.
     * c0cfcdd Adrien Thebo 3 months ago PLURALIZATION!
-    *   edf37aa Adrien Thebo 3 months ago Merge branch 'master' of oubliette.cat.pdx.edu:learning_unix
+    *   edf37aa Adrien Thebo 3 months ago Merge branch 'css_work'
     |\
     | * fda5612 Adrien Thebo 3 months ago Block quoting quotes
-    | * 8d7ca85 Adrien Thebo 3 months ago finch tries to do css. finch doesn't know what he's doing.
+    | * 8d7ca85 Adrien Thebo 3 months ago Try to fix CSS
     | * 27e6cf2 Adrien Thebo 3 months ago Usage of backticks instead of single quotes
-    | * fc72992 Adrien Thebo 3 months ago Added project euler to grab bag
-    | * 2f4b1b7 Adrien Thebo 3 months ago Added challenges page.
     | * c52996f Adrien Thebo 3 months ago Brief introductions to the sections on the index
-    * | 48d3834 Adrien Thebo 3 months ago Definitions or some shit like that.
+    * | 48d3834 Adrien Thebo 3 months ago Definitions or something like that.
     |/
-    * 8c02f3d Adrien Thebo 3 months ago Filled out command descriptions for shell survival guide
     * ffe5bb6 Adrien Thebo 3 months ago Renamed preamble to reasoning
     * 8851dae Adrien Thebo 3 months ago cleanup on redirection
 
-Git - Looking at current branches
-=================================
+## Git - Looking at current branches
 
-    > cd src/facter
-    > git branch
+    adrien@dre:~$ cd src/facter
+    adrien@dre:~$ git branch
     * 1.6.x
       external_fact_support_full
       master
@@ -489,20 +463,17 @@ Git - Looking at current branches
       ticket/master/2157-external_fact_support
       ticket/master/4561-add_structured_data
 
-I'm currently on the 1.6.x branch.
+  * I'm currently on the 1.6.x branch.
+  * The 'master' branch is the default branch.
+  * The ticket/(thing) branches are *feature* branches
 
-The 'master' branch is the default branch.
+## Git - Making a new branch
 
-The ticket/* branches are *feature* branches
-
-Git - Making a new branch
-=========================
-
-    > git branch new_feature_branch
+    adrien@dre:~$ git branch new_feature_branch
 
 This creates the branch 'new_feature_branch'
 
-    > git branch
+    adrien@dre:~$ git branch
     * 1.6.x
       external_fact_support_full
       master
@@ -515,17 +486,16 @@ This creates the branch 'new_feature_branch'
 
 Note that we're still on the 1.6.x branch
 
-Git - Making a new branch
-=========================
+## Git - Making a new branch
 
 Alternately...
 
-    > git checkout -b another_feature_branch
+    adrien@dre:~$ git checkout -b another_feature_branch
     Switched to a new branch 'another_feature_branch'
 
 This creates a new branch and switches to it.
 
-    > git branch
+    adrien@dre:~$ git branch
       1.6.x
     * another_feature_branch  <---- Another new branch! Note the asterisk!
       external_fact_support_full
@@ -539,26 +509,24 @@ This creates a new branch and switches to it.
 
 The asterisk indicates that this is our current branch.
 
-Git - Working in a branch
-=========================
+## Git - Working in a branch
 
   * When working in a branch, you would work as you would normally
   * This time, you have two different versions of history
   * Keep different tasks isolated
 
-Git - Merging a branch
-======================
+## Git - Merging a branch
 
 In this example, I'll merge the branch 'duplicity' into the main branch,
 'master'.
 
-    > git branch
+    adrien@dre:~$ git branch
     * duplicity
       ganeti
       master
-    > git checkout master
+    adrien@dre:~$ git checkout master
     Switched to branch 'master'
-    % git merge --no-ff duplicity
+    % git merge duplicity
     Merge made by recursive.
      dist/duplicity/manifests/cron.pp |   70 ++++++++++++++++++++++++++++++++-----
      1 files changed, 60 insertions(+), 10 deletions(-)
@@ -572,10 +540,9 @@ The resulting history looks like this:
     | * 14f7e30 Adrien Thebo 4 hours ago Remove unneeded inline_template from duplicity::cron
     | * affa757 Adrien Thebo 4 hours ago Add incremental, full backups + cleanups for duplicity
     |/
-    * f83a636 Adrien Thebo 5 hours ago Tyop in duplicity for gpg agent info
+    * f83a636 Adrien Thebo 5 hours ago Typo in duplicity for gpg agent info
 
-Git - Why Would You Use Branches?
-=================================
+## Git - Why Would You Use Branches?
 
   * Branches are incredibly powerful
   * They allow you to isolate different tasks
@@ -589,18 +556,14 @@ Many projects require features be implemented in a branch
 
 !SLIDE
 
-Git as Magick, Part III
------------------------
 
-Multiplayer Git with Github
----------------------------
+# Multiplayer Git with Github
 
-Github - Copying a project locally
-==================================
+## Github - Copying a project locally
 
 ### Cloning a project readonly
 
-    > git clone git://github.com/adrienthebo/worstprogramever
+    adrien@dre:~$ git clone git://github.com/adrienthebo/worstprogramever
     Cloning into worstprogramever...
     remote: Counting objects: 20, done.
     remote: Compressing objects: 100% (19/19), done.
@@ -610,7 +573,7 @@ Github - Copying a project locally
 
 ### Github - Cloning a project read/write
 
-    > git clone git@github.com:adrienthebo/worstprogramever
+    adrien@dre:~$ git clone git@github.com:adrienthebo/worstprogramever
     Cloning into worstprogramever...
     remote: Counting objects: 20, done.
     remote: Compressing objects: 100% (19/19), done.
@@ -621,27 +584,26 @@ Github - Copying a project locally
 Note the difference between the URLs; the former uses the git protocol, the
 latter uses SSH.
 
-Github - Making changes to a project
-====================================
+## Github - Making changes to a project
 
 ### Make your changes as normal...
 
-    > cd worstprogramever
-    > ls
+    adrien@dre:~$ cd worstprogramever
+    adrien@dre:~$ ls
     Makefile	fail.c
-    > mvim README.markdown
-    > git add README.markdown
-    > git st
+    adrien@dre:~$ mvim README.markdown
+    adrien@dre:~$ git add README.markdown
+    adrien@dre:~$ git st
     ## master
     A  README.markdown
-    > git ci
+    adrien@dre:~$ git ci
     [master 3534eef] Added a README!
      1 files changed, 25 insertions(+), 0 deletions(-)
      create mode 100644 README.markdown
 
 ### And then run `git push`
 
-    > git push
+    adrien@dre:~$ git push
     Counting objects: 4, done.
     Delta compression using up to 4 threads.
     Compressing objects: 100% (3/3), done.
