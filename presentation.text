@@ -559,10 +559,12 @@ Many projects require features be implemented in a branch
 
 # Multiplayer Git with Github
 
-## Github - Copying a project locally
+## Github - Copying a project as read-only
 
-### Cloning a project readonly
+  * When cloning a project as readonly, use `git://`
+  * EG: **git://**github.com/adrienthebo/worstprogramever
 
+<pre>
     adrien@dre:~$ git clone git://github.com/adrienthebo/worstprogramever
     Cloning into worstprogramever...
     remote: Counting objects: 20, done.
@@ -570,9 +572,14 @@ Many projects require features be implemented in a branch
     remote: Total 20 (delta 5), reused 9 (delta 1)
     Receiving objects: 100% (20/20), done.
     Resolving deltas: 100% (5/5), done.
+</pre>
 
-### Github - Cloning a project read/write
+## Github - Copying a project as read-write
 
+  * When cloning a project as read-write, use `git@`
+  * EG: **git@**github.com/adrienthebo/worstprogramever
+
+<pre>
     adrien@dre:~$ git clone git@github.com:adrienthebo/worstprogramever
     Cloning into worstprogramever...
     remote: Counting objects: 20, done.
@@ -580,20 +587,15 @@ Many projects require features be implemented in a branch
     remote: Total 20 (delta 5), reused 9 (delta 1)
     Receiving objects: 100% (20/20), done.
     Resolving deltas: 100% (5/5), done.
-
-Note the difference between the URLs; the former uses the git protocol, the
-latter uses SSH.
+</pre>
 
 ## Github - Making changes to a project
 
 ### Make your changes as normal...
 
-    adrien@dre:~$ cd worstprogramever
-    adrien@dre:~$ ls
-    Makefile	fail.c
-    adrien@dre:~$ mvim README.markdown
+    adrien@dre:~$ nano README.markdown
     adrien@dre:~$ git add README.markdown
-    adrien@dre:~$ git st
+    adrien@dre:~$ git status
     ## master
     A  README.markdown
     adrien@dre:~$ git ci
@@ -616,8 +618,7 @@ This uploads your branch to the remote server, so you can share it with people.
 
 !SLIDE
 
-Git internals
--------------
+# Git internals
 
 No one part of git is especially complicated.
 
@@ -628,8 +629,7 @@ Too bad there are so many parts...
 This stuff is complex, and isn't necessary to get up and running. Don't worry
 if it isn't immediately clear.
 
-Implementation
-==============
+## Implementation
 
   * Initially written as a "content addressable filesystem"
   * Simply put, you put stuff in it, and you get a key to retrieve data
@@ -638,8 +638,7 @@ Implementation
   * Has types of blob, tree, commit, and tag
   * Objects are identified by a SHA-1 hash
 
-Why hash everything?
-====================
+## Why hash everything?
 
   * Using hashes to identify parts of git repository may seem bizarre, but it adds a lot to git
   * Hashes ensure that nobody can tamper with any part of the repository without changing hashes
@@ -647,8 +646,11 @@ Why hash everything?
     * Instead of searching a series of files for some content, you look for a specific filename
     * Instead of slowing down git, using hashes speeds it up
 
-Blob
-====
+!SLIDE
+
+# The building blocks of Git
+
+## Blob
 
   * A "blob" is used to store file data - it is generally a file
   * Only contains the contents of a file
@@ -656,8 +658,7 @@ Blob
 
 ![Blob](./images/git/object-blob.png)
 
-Tree
-====
+## Tree
 
   * A "tree" is basically like a directory
   * It references a bunch of other trees and/or blobs (i.e. files and sub-directories)
@@ -665,8 +666,7 @@ Tree
 
  ![Tree](./images/git/object-tree.png)
 
-Commit
-======
+## Commit
 
   * A "commit" points to a single tree, marking it as what the project looked like at a certain point in time.
   * Has the following components:
@@ -678,65 +678,49 @@ Commit
 
 ![Commit](./images/git/object-commit.png)
 
-Tag
-===
+## Tag
 
   * A tag is used to "annotate" a particular object
   * Commonly used to designate a specific commit, for things such as releases
 
 ![Tag](./images/git/object-tag.png)
 
-Putting it all together
-=======================
+## Putting it all together
 
 ![Objects](./images/git/objects-example.png)
 
 !SLIDE
 
-Git concepts
-------------
+# Git concepts
 
-The working directory
-=====================
+## The working directory
 
   * The the directory containing your files in git is called the "working directory"
   * Any changes made to these are applied to the current branch
   * Nothing is absolute until you perform a git operation on it
   * Effectively a scratch space
 
-References
-==========
+## References
 
   * References are a way to track objects that are noteworthy
   * Simply a file containing a SHA1 hash
   * Lightweight tags are basically a reference and a tag object
 
-The index
-=========
+## The index
 
   * The index, or staging area, is where you accumulate changes before a commit
   * This allows you to very carefully assemble commits
   * This is in contrast to SVN, where performing a commit adds all changes
 
-Branches
-========
-
-  * Git is designed to let you have different versions fo the same codebase available
-  * This lets you break up your work into discrete chunks very easily
-  * The working directory is only the currently checked out branch, and switching it is very easy
-
 !SLIDE
 
-Using git
----------
+# Git workflow and commands
 
-Git workflow
-============
+## Git workflow
 
 ![Workflow](./images/git/git-workflow.png)
 
-Changing files with git
-=======================
+## Changing files with git
 
   * `git init` - Creates a git repository in the current working disrectory
   * `git add` - Adds the specified file to the index
@@ -745,8 +729,7 @@ Changing files with git
   * `git mv` - Renames the file - equivalent to `mv file1 file2; git rm file1; git add file2`
     * Remember that git doesn't track file names in a blob, so moves are tricky
 
-Viewing git information
-=======================
+## Viewing git information
 
   * `git status` - Shows the status of the changed files
   * `git diff` - Shows the difference between two files, or the changes made to a file
@@ -754,15 +737,13 @@ Viewing git information
   * `git blame` - Shows the author of every line in the file
   * `git bisect` - Search the git history for a specific commit
 
-Branching and merging
-=====================
+## Branching and merging
 
   * `git branch` - Create, show and delete branches
   * `git checkout` - Create and switch branches
   * `git merge` - Merge the changes from one branch into the current branch
 
-Making changes to the history
-=============================
+## Making changes to the history
 
   * `git reset` - Restores the working copy to the most recent committed version
   * `git checkout` - Restores a single file in the working copy to the most recent committed version
@@ -771,8 +752,7 @@ Making changes to the history
   * `git cherry-pick` - Applies a single commit to your current branch
   * `git rebase` - Rewrite history
 
-Collaboration
-=============
+## Collaboration
 
   * `git clone` - Fetches a remote git repository and checks it out
   * `git fetch` - Fetches objects and reference from a remote repository
@@ -781,26 +761,22 @@ Collaboration
 
 !SLIDE
 
-Advanced Git
-------------
+# Advanced Git
 
-Git hooks
-=========
+## Git hooks
 
   * Git allows you to customize behavior with hooks
     * Ensure that the code works before merging it
     * Deploy code elsewhere after a commit
     * Other actions that need to happen automatically
 
-The really gory details
-=======================
+## The really gory details
 
 This slide will be completed someday.
 
 HAHAHAHA no.
 
-References/Shit I Blatantly Ripped Off
-======================================
+## References
 
   * [The Git Community Book](http://book.git-scm.com/)
   * [Pro Git](http://progit.org/book)
