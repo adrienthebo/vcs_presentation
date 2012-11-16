@@ -783,5 +783,5 @@ HAHAHAHA no.
 
 ## Find this Presentation
 
-  * [Github Repository](http://github.com/adrienthebo/vcs_presentation)
-  * [Hosted Presentation](http://adrienthebo.github.com/vcs_presentation)
+  * [Github Repository: http://github.com/adrienthebo/vcs_presentation](http://github.com/adrienthebo/vcs_presentation)
+  * [Hosted Presentation: http://adrienthebo.github.com/vcs_presentation](http://adrienthebo.github.com/vcs_presentation)
